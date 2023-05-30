@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <router-link v-bind:to="{name: 'create-game'}">
+        Create Game
+    </router-link>
+    <br>
+    <router-link v-bind:to="{name: 'my-games'}">
+      My Games
+    </router-link>
   </div>
 </template>
 
@@ -10,3 +16,7 @@ export default {
   name: "home"
 };
 </script>
+
+<style scoped>
+
+</style>

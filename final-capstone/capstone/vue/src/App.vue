@@ -7,3 +7,10 @@
     <router-view />
   </div>
 </template>
+
+<style scoped>
+  #nav {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+</style>

@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import CreateGameView from '../views/CreateGameView.vue'
+import MyGamesView from '../views/MyGamesView.vue'
 
 Vue.use(Router)
 
@@ -51,6 +53,22 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/create-game",
+      name: "create-game",
+      component: CreateGameView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/my-games",
+      name: "my-games",
+      component: MyGamesView,
+      meta: {
+        requiresAuth: true
       }
     }
   ]
