@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,8 +19,15 @@ import java.util.List;
 public class GameController {
     private GameDao dao;
 
-    public GameController(){
-        this.dao = new JdbcGameDao();
+    public GameController(GameDao gameDao){
+        this.dao = gameDao;
+    }
+
+
+    @RequestMapping(path = "", method = RequestMethod.GET)
+//    @PreAuthorize()
+    public List<Game> getAllGames(){
+        return dao.list();
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
@@ -37,7 +45,10 @@ public class GameController {
     @RequestMapping(path = "", method = RequestMethod.POST)
 //    @PreAuthorize()
     public Game create(@Valid @RequestBody Game game){
-        return dao.create(game);
+        String gameName = game.getGameName();
+        int organizerId = game.getOrganizerId();
+        Date endDate = game.getEndDate();
+        return dao.create(gameName, organizerId, endDate);
     }
 
 

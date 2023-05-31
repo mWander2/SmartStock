@@ -1,32 +1,29 @@
 package com.techelevator.model;
 
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
-import java.util.List;
 
 public class Game {
     private int gameId;
     @NotBlank(message = "The field `gameName` should not be blank.")
     private String gameName;
-    @NotBlank(message = "The field `organizer` should not be blank.")
-    private User organizer;
+    private int organizerId;
     @NotBlank(message="The field `endDate` should not be blank.")
     private Date endDate;
 
     public Game() {
     }
 
-    public Game(String gameName, User organizer, Date endDate) {
+    public Game(String gameName, int organizerId, Date endDate) {
         this.gameName = gameName;
-        this.organizer = organizer;
+        this.organizerId = organizerId;
         this.endDate = endDate;
     }
 
-    public Game(int gameId, String gameName, User organizer, Date endDate) {
+    public Game(int gameId, String gameName, int organizerId, Date endDate) {
         this.gameId = gameId;
         this.gameName = gameName;
-        this.organizer = organizer;
+        this.organizerId = organizerId;
         this.endDate = endDate;
     }
 
@@ -46,12 +43,12 @@ public class Game {
         this.gameName = gameName;
     }
 
-    public User getOrganizer() {
-        return organizer;
+    public int getOrganizerId() {
+        return organizerId;
     }
 
-    public void setOrganizer(User organizer) {
-        this.organizer = organizer;
+    public void setOrganizerId(int organizerId) {
+        this.organizerId = organizerId;
     }
 
     public Date getEndDate() {
@@ -65,7 +62,7 @@ public class Game {
     @Override
     public String toString() {
         return "Game{" + "gameId=" + gameId + ", gameName='" + gameName + '\''
-                + ", organizer='" + organizer + '\'' + ", endDate=" + endDate + '}';
+                + ", organizerId='" + organizerId + '\'' + ", endDate=" + endDate + '}';
     }
 }
 
