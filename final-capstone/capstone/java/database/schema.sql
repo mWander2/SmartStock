@@ -3,7 +3,8 @@ DROP TABLE IF EXISTS portfolio, user_game, game, users CASCADE;
 CREATE TABLE users (
     user_id serial PRIMARY KEY,
     username varchar(50) UNIQUE NOT NULL,
-    password_hash varchar(200) NOT NULL
+    password_hash varchar(200) NOT NULL,
+    role varchar(50) NOT NULL
 );
 
 CREATE TABLE game (

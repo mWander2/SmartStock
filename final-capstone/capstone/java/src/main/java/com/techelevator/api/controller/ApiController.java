@@ -13,8 +13,8 @@ public class ApiController {
     @Autowired
     ApiService apiService = new ApiService();
 
-    @RequestMapping(path="/test", method=RequestMethod.GET)
-    public List<ApiModel> test(@RequestParam String query) {
+    @RequestMapping(path="/search", method=RequestMethod.GET)
+    public List<ApiModel> search(@RequestParam String query) {
 
         return apiService.getSearchResults(query);
 
