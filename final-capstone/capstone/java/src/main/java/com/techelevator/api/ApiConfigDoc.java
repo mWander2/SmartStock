@@ -1,4 +1,4 @@
-package APIConfig;
+package com.techelevator.api;
 
 import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
