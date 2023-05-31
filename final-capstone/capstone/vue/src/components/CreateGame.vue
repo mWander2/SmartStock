@@ -1,11 +1,18 @@
 <template>
-  <div>
+  <div id="form-container">
       <form v-on:submit.prevent="createGame">
-          <label for="name">Game Name </label>
-          <input type="text" v-model="newGame.name"> <br>
-          <label for="date">End Date </label>
-          <input type="date" v-model="newGame.date"> <br>
-          <button>Create</button>
+          <h1>Create Your Game</h1>
+          <div class="form-input-group">
+            <label for="name">Game Name</label>
+            <input type="text" id="text" v-model="newGame.name"> 
+          </div>
+          <div class="form-input-group">
+            <label for="date">End Date</label>
+            <input type="date" id="date" v-model="newGame.date">
+          </div>
+          <div>
+              <button type="submit">Create</button>
+          </div>
       </form>
   </div>
 </template>
@@ -35,6 +42,38 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+/* #form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-basis: 100%;
+  text-align: center;
+  width: 60%;
+  background-color: #9daac8;
+  color: rgb(31, 31, 56);
+  border-radius: 10px;
+} */
+
+.form-input-group {
+  margin-bottom: 1rem;
+}
+label {
+  margin-right: 0.5rem;
+}
+
+#form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+
+    text-align: center;
+    background-color: #9daac8;
+    color: rgb(31, 31, 56);
+    border-radius: 10px;
+}
 
 </style>

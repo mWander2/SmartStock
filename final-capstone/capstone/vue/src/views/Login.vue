@@ -18,7 +18,8 @@
       </div>
       <button type="submit">Sign in</button>
       <p>
-      <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+        <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link>
+      </p>
     </form>
   </div>
 </template>
@@ -68,4 +69,18 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-basis: 65%;
+  text-align: center;
+  width: 60%;
+  background-color: #9daac8;
+  color: rgb(31, 31, 56);
+  border-radius: 10px;
+}
+
 </style>
