@@ -20,7 +20,7 @@ export default {
         }
     },
     created() {
-        stockService.getAllGames().then(
+        stockService.showMyGames().then(
             (response) => {
                 this.gamesList = response.data;
 

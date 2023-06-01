@@ -11,7 +11,7 @@ export default {
     },
 
     showMyGames() {
-        return axios.get('')
+        return axios.get('/username')
     }
 
 }
