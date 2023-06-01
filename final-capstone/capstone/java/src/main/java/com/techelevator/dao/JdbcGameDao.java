@@ -16,7 +16,7 @@ public class JdbcGameDao implements GameDao {
         Game game = new Game();
         game.setGameId(rs.getInt("game_id"));
         game.setGameName(rs.getString("game_name"));
-        game.setEndDate(rs.getDate("end_date"));
+        game.setEndDate(rs.getString("end_date"));
         game.setOrganizerName(rs.getInt("organizer_id"));
         return game;
     }
@@ -53,7 +53,7 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
-    public Game create(String gameName, String organizerName, Date endDate) {
+    public Game create(String gameName, String organizerName, String endDate) {
         String sql = "INSERT INTO game (game_name, organizer_id, end_date) " +
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_id, end_date";

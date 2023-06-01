@@ -49,7 +49,7 @@ public class GameController {
     public Game create(@Valid @RequestBody Game game, Principal principal){
         String gameName = game.getGameName();
         String organizerName = principal.getName();
-        Date endDate = game.getEndDate();
+        String endDate = game.getEndDate();
         return dao.create(gameName, organizerName, endDate);
     }
 
