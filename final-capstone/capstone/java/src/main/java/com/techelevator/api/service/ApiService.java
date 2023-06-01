@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -25,8 +26,12 @@ public class ApiService {
 
     public List<ApiModel> getSearchResults(String searchString) {
 
-        String url = apiUrl + apiKey + "&limit=10&q=" + searchString;
+        String url = apiUrl + "&limit=10&q=" + searchString;
         System.out.println(url);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + apiKey);
+
 
         HttpEntity<String> httpEntity = new HttpEntity<>("");
         RestTemplate restTemplate = new RestTemplate();
