@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -44,11 +45,11 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "", method = RequestMethod.POST)
 //    @PreAuthorize()
-    public Game create(@Valid @RequestBody Game game){
+    public Game create(@Valid @RequestBody Game game, Principal principal){
         String gameName = game.getGameName();
-        int organizerId = game.getOrganizerId();
+        String organizerName = principal.getName();
         Date endDate = game.getEndDate();
-        return dao.create(gameName, organizerId, endDate);
+        return dao.create(gameName, organizerName, endDate);
     }
 
 

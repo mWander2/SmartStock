@@ -19,7 +19,7 @@ public class JdbcGameDao implements GameDao {
         game.setGameId(rs.getInt("game_id"));
         game.setGameName(rs.getString("game_name"));
         game.setEndDate(rs.getDate("end_date"));
-        game.setOrganizerId(rs.getInt("organizer_id"));
+        game.setOrganizerName(rs.getInt("organizer_id"));
         return game;
     }
 
@@ -53,11 +53,11 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
-    public Game create(String gameName, int organizerId, Date endDate) {
+    public Game create(String gameName, String organizerName, Date endDate) {
         String sql = "INSERT INTO games (game_name, organizer_id, end_date) " +
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_id, end_date";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerId, endDate);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
 
         if (result.next()){
             Game game = mapRowToGame(result);
@@ -76,7 +76,7 @@ public class JdbcGameDao implements GameDao {
             "WHERE game_id = ?";
 
        int rowsAffected =  jdbcTemplate.update(sql, game.getGameName(),
-                game.getOrganizerId(), game.getEndDate(), gameId);
+                game.getOrganizerName(), game.getEndDate(), gameId);
         updatedGame = get(game.getGameId());
         if(rowsAffected > 0) {
             return updatedGame;
