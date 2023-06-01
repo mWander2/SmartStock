@@ -1,13 +1,12 @@
 <template>
   <div>
       <h2>My Games</h2>
-      <div class="game-container">
-          <div v-for="game in gamesList" v-bind:key="game.id">
-            <h2>{{game.name}}</h2>
-            <router-link v-bind:to="{name: 'view-game', params: {id: game.id}}">
-                  View Game
-            </router-link>
-          </div>
+      <div class="game-container" v-for="game in gamesList" v-bind:key="game.gameId">
+        <h2>{{game.gameName}}</h2>
+        <router-link v-bind:to="{name: 'view-game', params: {id: game.gameId}}">
+                View Game
+        </router-link>
+        {{gamesList.length}}
       </div>
       
 
@@ -25,8 +24,9 @@ export default {
     },
     created() {
         stockService.getAllGames().then(
-            response => {
+            (response) => {
                 this.gamesList = response.data;
+
             }
         )
     }

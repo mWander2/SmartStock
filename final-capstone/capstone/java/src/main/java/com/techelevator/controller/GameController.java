@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/games")
 @PreAuthorize("isAuthenticated()")
 public class GameController {
