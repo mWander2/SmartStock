@@ -89,6 +89,24 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
+    public List<Game> searchByUsername(String username) {
+        List<Game> games = new ArrayList<>();
+
+        String sql = "SELECT * " +
+                "FROM game g " +
+                "WHERE username = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        while(results.next()){
+            Game game = mapRowToGame(results);
+            games.add(game);
+        }
+        return games;
+
+
+
+    }
+
+    @Override
     public int delete(int gameId) {
         int numRowsDeleted = 0;
         String sql0 = "DELETE FROM user_game WHERE game_id = ?";

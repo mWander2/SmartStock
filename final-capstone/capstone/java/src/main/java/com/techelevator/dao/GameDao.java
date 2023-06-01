@@ -13,5 +13,7 @@ public interface GameDao {
 
     Game update(Game game, int gameId);
 
+    List<Game> searchByUsername(String username);
+
     int delete(int id);
 }
