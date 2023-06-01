@@ -1,5 +1,5 @@
 <template>
-  <div class="game-container">
+  <div class="game-card">
       <h1>Game Name</h1>
       <h2>Organizer</h2>
       <p>Players : Score</p>
@@ -12,9 +12,9 @@ export default {
 }
 </script>
 
-<style>
-    .game-container {
-        background: darkgreen;
-        border-radius: 5px;
+<style scope>
+    .game-card {
+        background: #9daac8;
+        border-radius: 10px;
     }
 </style>

@@ -1,15 +1,12 @@
 <template>
-  <div>
-      <h2>My Games</h2>
-      <div class="game-container" v-for="game in gamesList" v-bind:key="game.gameId">
+  <div class="games">
+    <h2>My Games</h2>
+    <div class="game-container" v-for="game in gamesList" v-bind:key="game.gameId">
         <h2>{{game.gameName}}</h2>
         <router-link v-bind:to="{name: 'view-game', params: {id: game.gameId}}">
-                View Game
+            View Game
         </router-link>
-        {{gamesList.length}}
-      </div>
-      
-
+    </div>
   </div>
 </template>
 
@@ -34,6 +31,12 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
+
+.games {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
 </style>
