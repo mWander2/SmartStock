@@ -3,15 +3,15 @@ package com.techelevator.dao;
 import com.techelevator.model.Game;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component
 public class JdbcGameDao implements GameDao {
+    private static List<Game> games = new ArrayList<>();
+
 
     private JdbcTemplate jdbcTemplate;
     private Game mapRowToGame(SqlRowSet rs){
@@ -29,7 +29,6 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public List<Game> list() {
-        List<Game> games = new ArrayList<>();
         String sql = "SELECT * " +
                 "FROM game g ";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -54,13 +53,8 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
-<<<<<<< HEAD
     public Game create(String gameName, String organizerName, Date endDate) {
-        String sql = "INSERT INTO games (game_name, organizer_id, end_date) " +
-=======
-    public Game create(String gameName, int organizerId, Date endDate) {
         String sql = "INSERT INTO game (game_name, organizer_id, end_date) " +
->>>>>>> main
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_id, end_date";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
@@ -96,7 +90,7 @@ public class JdbcGameDao implements GameDao {
     public int delete(int gameId) {
         int numRowsDeleted = 0;
         String sql0 = "DELETE FROM user_game WHERE game_id = ?";
-        String sql1 = "DELETE FROM game WHERE game_id = ?";
+        String sql1 = "DELETE FROM games WHERE game_id = ?";
 
         jdbcTemplate.update(sql0, gameId);
         numRowsDeleted = jdbcTemplate.update(sql1, gameId);
