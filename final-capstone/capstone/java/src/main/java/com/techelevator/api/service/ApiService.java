@@ -1,9 +1,10 @@
 package com.techelevator.api.service;
 
-import com.techelevator.api.model.ApiModel;
+import com.techelevator.api.model.ResultsModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.techelevator.api.model.StockModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Component
 public class ApiService {
 
@@ -23,9 +25,9 @@ public class ApiService {
     @Value("${polygon.api.key}")
     private String apiKey;
 
-    public List<ApiModel> getSearchResults(String searchString) {
+    public StockModel getSearchResults(String ticker) {
 
-        String url = apiUrl + "&limit=10&q=" + searchString;
+        String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
         System.out.println(url);
 
         HttpHeaders headers = new HttpHeaders();
@@ -37,25 +39,36 @@ public class ApiService {
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
         JsonNode jsonNode;
-        List<ApiModel> apiList = new ArrayList<>();
+        List<ResultsModel> resultsList = new ArrayList<>();
 
         try {
             jsonNode = objectMapper.readTree(response.getBody());
-            JsonNode root = jsonNode.path("results");
+            JsonNode resultsNode = jsonNode.path("results");
 
-            for (int i=0; i < root.size(); i++) {
-                double closePrice = root.path(i).path("c").asDouble();
-                int transactions = root.path(i).path("n").asInt();
-                String status = root.path(i).path("status").asText();
-                String ticker = root.path(i).path("ticker").asText();
+            for (JsonNode resultNode : resultsNode) {
+                double closePrice = resultNode.path("c").asDouble();
+                int transactions = resultNode.path("n").asInt();
+                String status = resultNode.path("status").asText();
+                String resultTicker = resultNode.path("ticker").asText();
 
-                ApiModel apiModel = new ApiModel(closePrice, transactions, status, ticker);
-                apiList.add(apiModel);
+                ResultsModel resultsModel = new ResultsModel(closePrice, transactions, status, resultTicker);
+                resultsList.add(resultsModel);
             }
+
+            boolean adjusted = jsonNode.path("adjusted").asBoolean();
+            int queryCount = jsonNode.path("queryCount").asInt();
+            String requestId = jsonNode.path("request_id").asText();
+            int resultsCount = jsonNode.path("resultsCount").asInt();
+            String status = jsonNode.path("status").asText();
+            String stockTicker = jsonNode.path("ticker").asText();
+
+            StockModel stockModel = new StockModel(adjusted, queryCount, requestId, resultsCount, status, stockTicker, resultsList);
+            return stockModel;
+
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        return apiList;
+        return null;
     }
 }
