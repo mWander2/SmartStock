@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 public class JdbcGameDao implements GameDao {
-    private static List<Game> games = new ArrayList<>();
-
 
     private JdbcTemplate jdbcTemplate;
     private Game mapRowToGame(SqlRowSet rs){
@@ -29,6 +27,8 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public List<Game> list() {
+        List<Game> games = new ArrayList<>();
+
         String sql = "SELECT * " +
                 "FROM game g ";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
