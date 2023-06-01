@@ -80,4 +80,17 @@ export default {
 label {
   margin-right: 0.5rem;
 }
+
+#register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-basis: 65%;
+  text-align: center;
+  width: 60%;
+  background-color: #9daac8;
+  color: rgb(31, 31, 56);
+  border-radius: 10px;
+}
 </style>
