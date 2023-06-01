@@ -3,11 +3,10 @@ package com.techelevator.api.controller;
 import com.techelevator.api.model.ApiModel;
 import com.techelevator.api.service.ApiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Component
+
 @RestController
 public class ApiController {
     @Autowired

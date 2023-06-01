@@ -14,7 +14,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-
 @Component
 public class ApiService {
 
@@ -32,36 +31,25 @@ public class ApiService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + apiKey);
 
-
-        HttpEntity<String> httpEntity = new HttpEntity<>("");
+        HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
         RestTemplate restTemplate = new RestTemplate();
         ObjectMapper objectMapper = new ObjectMapper();
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
         JsonNode jsonNode;
-        List<ApiModel> apiList = new ArrayList<ApiModel>();
+        List<ApiModel> apiList = new ArrayList<>();
 
         try {
             jsonNode = objectMapper.readTree(response.getBody());
+            JsonNode root = jsonNode.path("results");
 
-            JsonNode root = jsonNode.path("data");
-
-            for (int i = 0; i < root.size(); i++) {
-                int closePrice = root.path(i).path("closePrice").asInt();
-                int highPrice = root.path(i).path("highPrice").asInt();
-                int lowPrice = root.path(i).path("lowPrice").asInt();
-                int openPrice = root.path(i).path("openPrice").asInt();
-                int timeStamp = root.path(i).path("timeStamp").asInt();
-                int volume = root.path(i).path("volume").asInt();
-                String ticker = root.path(i).path("ticker").asText();
-                Boolean isAdjusted = root.path(i).path("isAdjusted").asBoolean();
-                int queryCount = root.path(i).path("queryCount").asInt();
-                String requestId = root.path(i).path("requestId").asText();
-                int resultsCount = root.path(i).path("resultsCount").asInt();
+            for (int i=0; i < root.size(); i++) {
+                double closePrice = root.path(i).path("c").asDouble();
+                int transactions = root.path(i).path("n").asInt();
                 String status = root.path(i).path("status").asText();
+                String ticker = root.path(i).path("ticker").asText();
 
-                ApiModel apiModel = new ApiModel(closePrice, highPrice, lowPrice, openPrice, timeStamp, volume,
-                        ticker, isAdjusted, queryCount, requestId, resultsCount, status);
+                ApiModel apiModel = new ApiModel(closePrice, transactions, status, ticker);
                 apiList.add(apiModel);
             }
         } catch (JsonProcessingException e) {
@@ -71,4 +59,3 @@ public class ApiService {
         return apiList;
     }
 }
-

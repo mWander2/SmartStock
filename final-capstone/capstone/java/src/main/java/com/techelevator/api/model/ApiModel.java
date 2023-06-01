@@ -2,79 +2,33 @@ package com.techelevator.api.model;
 
 public class ApiModel {
 
-    private int closePrice;
-    private int highPrice;
-    private int lowPrice;
-    private int openPrice;
-    private int timeStamp;
-
-    private String ticker;
-    private Boolean isAdjusted;
-//    private int queryCount;
-//    private String requestId;
-    private int resultsCount;
+    private double closePrice;
+    private int transactions;
     private String status;
+    private String ticker;
 
-    public ApiModel(int closePrice, int highPrice, int lowPrice, int openPrice, int timeStamp, int volume,
-                    String ticker, Boolean isAdjusted, int queryCount, String requestId, int resultsCount, String status) {
+    public ApiModel(double closePrice, int transactions, String status, String ticker) {
         this.closePrice = closePrice;
-        this.highPrice = highPrice;
-        this.lowPrice = lowPrice;
-        this.openPrice = openPrice;
-        this.timeStamp = timeStamp;
-        this.ticker = ticker;
-        this.isAdjusted = isAdjusted;
-//        this.queryCount = queryCount;
-//        this.requestId = requestId;
-        this.resultsCount = resultsCount;
+        this.transactions = transactions;
         this.status = status;
+        this.ticker = ticker;
     }
 
-    public int getClosePrice() {
+    public double getClosePrice() {
         return closePrice;
     }
 
-    public int getHighPrice() {
-        return highPrice;
-    }
-
-    public int getLowPrice() {
-        return lowPrice;
-    }
-
-    public int getOpenPrice() {
-        return openPrice;
-    }
-
-    public int getTimeStamp() {
-        return timeStamp;
-    }
-
-//    public int getVolume() {
-//        return volume;
-//    }
-
-    public String getTicker() {
-        return ticker;
-    }
-
-    public Boolean getAdjusted() {
-        return isAdjusted;
-    }
-
-//    public int getQueryCount() {
-//        return queryCount;
-//    }
-//
-//    public String getRequestId() {
-//        return requestId;
-//    }
-
-    public int getResultsCount() {
-        return resultsCount;
+    public int getTransactions() {
+        return transactions;
     }
 
     public String getStatus() {
         return status;
     }
+
+    public String getTicker() {
+        return ticker;
+    }
 }
+
+
