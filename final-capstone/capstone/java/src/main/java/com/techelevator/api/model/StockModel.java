@@ -3,6 +3,7 @@ package com.techelevator.api.model;
 import java.math.BigDecimal;
 
 public class StockModel {
+
     private BigDecimal currentPrice;
     private String ticker;
     private String stockName;

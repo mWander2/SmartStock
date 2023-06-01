@@ -44,7 +44,7 @@ public class GameController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @RequestMapping(path = "/new", method = RequestMethod.POST)
 //    @PreAuthorize()
     public Game create(@Valid @RequestBody Game game, Principal principal){
         String gameName = game.getGameName();
