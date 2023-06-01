@@ -42,7 +42,7 @@ export default {
         createGame() {
             stockService.createGame(this.newGame).then(
                 response => {
-                    if(response.status === 200) {
+                    if(response.status === 201) {
                         this.newGame = {};
                         this.$router.push({name: 'home'})
                     }

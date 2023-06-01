@@ -10,9 +10,9 @@ CREATE TABLE users (
 CREATE TABLE game (
     game_id serial PRIMARY KEY,
     game_name varchar(50) NOT NULL,
-    organizer_id int NOT NULL,
-    end_date date NOT NULL,
-    CONSTRAINT FK_game_organizer FOREIGN KEY (organizer_id) REFERENCES users (user_id)
+    organizer_name varchar(50) NOT NULL,
+    end_date varchar(10) NOT NULL,
+    CONSTRAINT FK_game_organizer FOREIGN KEY (organizer_name) REFERENCES users (username)
 );
 
 CREATE TABLE user_game (

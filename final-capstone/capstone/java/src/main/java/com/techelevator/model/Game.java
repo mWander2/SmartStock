@@ -7,20 +7,20 @@ public class Game {
     private int gameId;
     @NotBlank(message = "The field `gameName` should not be blank.")
     private String gameName;
-    private int organizerName;
+    private String organizerName;
     @NotBlank(message="The field `endDate` should not be blank.")
     private String endDate;
 
     public Game() {
     }
 
-    public Game(String gameName, int organizerName, String endDate) {
+    public Game(String gameName, String organizerName, String endDate) {
         this.gameName = gameName;
         this.organizerName = organizerName;
         this.endDate = endDate;
     }
 
-    public Game(int gameId, String gameName, int organizerName, String endDate) {
+    public Game(int gameId, String gameName, String organizerName, String endDate) {
         this.gameId = gameId;
         this.gameName = gameName;
         this.organizerName = organizerName;
@@ -43,11 +43,11 @@ public class Game {
         this.gameName = gameName;
     }
 
-    public int getOrganizerName() {
+    public String getOrganizerName() {
         return organizerName;
     }
 
-    public void setOrganizerName(int organizerName) {
+    public void setOrganizerName(String organizerName) {
         this.organizerName = organizerName;
     }
 

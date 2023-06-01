@@ -8,6 +8,10 @@ export default {
 
     createGame(game) {
         return axios.post('/games/new', game)
+    },
+
+    showMyGames() {
+        return axios.get('')
     }
 
 }
