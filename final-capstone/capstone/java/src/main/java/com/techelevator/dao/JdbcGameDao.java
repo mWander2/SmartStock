@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,6 +60,7 @@ public class JdbcGameDao implements GameDao {
         String sql = "INSERT INTO game (game_name, organizer_name, end_date) " +
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_name, end_date";
+        String sql = "INSERT INTO user_game "
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
 
         if (result.next()){
@@ -88,12 +90,19 @@ public class JdbcGameDao implements GameDao {
         }
     }
 
+    public String getUsername(Principal principal){
+        return principal.getName();
+    }
+
+
     @Override
     public List<Game> searchByUsername(String username) {
         List<Game> games = new ArrayList<>();
 
         String sql = "SELECT * " +
                 "FROM game g " +
+                "JOIN user_game ON game.game_id = user_game.game_id " +
+                "JOIN users ON users.user_id = user_game.user_id" +
                 "WHERE username = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()){

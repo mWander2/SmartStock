@@ -43,6 +43,11 @@ public class GameController {
         }
     }
 
+    @RequestMapping(path = "/get", method = RequestMethod.GET)
+    public String getUsername(Principal principal){
+        return dao.getUsername(principal);
+    }
+
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
 //    @PreAuthorize()
