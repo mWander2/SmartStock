@@ -12,8 +12,6 @@ import java.util.List;
 
 @Component
 public class JdbcGameDao implements GameDao {
-    private static List<Game> games = new ArrayList<>();
-
 
     private JdbcTemplate jdbcTemplate;
     private Game mapRowToGame(SqlRowSet rs){
@@ -31,8 +29,9 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public List<Game> list() {
+        List<Game> games = new ArrayList<>();
         String sql = "SELECT * " +
-                "FROM games g ";
+                "FROM game g ";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()){
             Game game = mapRowToGame(results);
@@ -44,7 +43,7 @@ public class JdbcGameDao implements GameDao {
     @Override
     public Game get(int gameId) {
       String sql = "SELECT * " +
-              "FROM games g " +
+              "FROM game g " +
               "WHERE g.game_id = ?";
       SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameId);
       if(result.next()){
@@ -56,7 +55,7 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public Game create(String gameName, int organizerId, Date endDate) {
-        String sql = "INSERT INTO games (game_name, organizer_id, end_date) " +
+        String sql = "INSERT INTO game (game_name, organizer_id, end_date) " +
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_id, end_date";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerId, endDate);
@@ -73,7 +72,7 @@ public class JdbcGameDao implements GameDao {
     @Override
     public Game update(Game game, int gameId) {
         Game updatedGame = null;
-    String sql = "UPDATE games " +
+    String sql = "UPDATE game " +
             "SET game_name = ?, organizer_id = ?, end_date = ? " +
             "WHERE game_id = ?";
 
@@ -92,7 +91,7 @@ public class JdbcGameDao implements GameDao {
     public int delete(int gameId) {
         int numRowsDeleted = 0;
         String sql0 = "DELETE FROM user_game WHERE game_id = ?";
-        String sql1 = "DELETE FROM games WHERE game_id = ?";
+        String sql1 = "DELETE FROM game WHERE game_id = ?";
 
         jdbcTemplate.update(sql0, gameId);
         numRowsDeleted = jdbcTemplate.update(sql1, gameId);

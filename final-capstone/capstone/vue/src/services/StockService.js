@@ -3,11 +3,11 @@ import axios from "axios";
 export default {
 
     getAllGames() {
-        return axios.get("/allGames")
+        return axios.get("/games")
     },
 
-    createGame(game) {
-        return axios.post('/games', game)
-    }
+    // createGame(game) {
+    //     return axios.post('/games', game)
+    // }
 
 }
