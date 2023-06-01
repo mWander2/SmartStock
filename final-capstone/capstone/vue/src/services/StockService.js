@@ -7,7 +7,7 @@ export default {
     },
 
     createGame(game) {
-        return axios.post('/games/newGame', game)
+        return axios.post('/games/new', game)
     }
 
 }

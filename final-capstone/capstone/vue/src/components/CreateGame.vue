@@ -1,6 +1,6 @@
 <template>
-  <div id="form-container">
-      <div>
+  <div>
+      <div class="instructions">
         <h1>How to Play</h1>
         <ol>
           <li>Your initial virtual currency or investment amount is set to $100,000! This is the amount of money you will use to buy and sell stocks within the game.</li>
@@ -10,7 +10,8 @@
           <li>Keep playing! Adjust your investment strategy, buying or selling stocks as needed, to maximize your profits and portfolio value. Explore our competitions, challenges, and leaderboards to learn more!</li>
         </ol>
       </div>
-      <form v-on:submit.prevent="createGame">
+      <div id="form-container">
+        <form v-on:submit.prevent="createGame">
           <h1>Create Your Game</h1>
           <div class="form-input-group">
             <label for="name">Game Name</label>
@@ -24,6 +25,7 @@
               <button type="submit">Create</button>
           </div>
       </form>
+      </div>
   </div>
 </template>
 
@@ -84,6 +86,17 @@ label {
     background-color: #9daac8;
     color: rgb(31, 31, 56);
     border-radius: 10px;
+}
+
+.instructions {
+  background: #cff5ea;
+  border-radius: 10px;
+  padding: 20px 0px;
+  margin-bottom: 10px;
+}
+
+.instructions h1 {
+  text-align: center;
 }
 
 </style>
