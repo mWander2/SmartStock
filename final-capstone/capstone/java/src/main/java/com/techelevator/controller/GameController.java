@@ -32,6 +32,18 @@ public class GameController {
         return dao.list();
     }
 
+    @RequestMapping(path = "/username", method = RequestMethod.GET)
+    public List<Game> showMyGames(Principal principal){
+        List<Game> myGames = dao.searchByUsername(principal.getName());
+        if(myGames == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else{
+            return myGames;
+        }
+    }
+
+
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
 //    @PreAuthorize()
     public Game get(@PathVariable int id){
