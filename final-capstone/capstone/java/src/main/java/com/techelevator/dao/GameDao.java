@@ -9,7 +9,7 @@ public interface GameDao {
     List<Game> list();
     Game get(int gameId);
 
-    Game create(String gameName, int organizerId, Date endDate);
+    Game create(String gameName, String organizerName, Date endDate);
 
     Game update(Game game, int gameId);
 

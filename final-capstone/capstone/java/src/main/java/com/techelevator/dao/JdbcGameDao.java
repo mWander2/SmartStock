@@ -3,14 +3,12 @@ package com.techelevator.dao;
 import com.techelevator.model.Game;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Component
 public class JdbcGameDao implements GameDao {
 
     private JdbcTemplate jdbcTemplate;
@@ -19,7 +17,7 @@ public class JdbcGameDao implements GameDao {
         game.setGameId(rs.getInt("game_id"));
         game.setGameName(rs.getString("game_name"));
         game.setEndDate(rs.getDate("end_date"));
-        game.setOrganizerId(rs.getInt("organizer_id"));
+        game.setOrganizerName(rs.getInt("organizer_id"));
         return game;
     }
 
@@ -30,6 +28,7 @@ public class JdbcGameDao implements GameDao {
     @Override
     public List<Game> list() {
         List<Game> games = new ArrayList<>();
+
         String sql = "SELECT * " +
                 "FROM game g ";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -54,11 +53,11 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
-    public Game create(String gameName, int organizerId, Date endDate) {
+    public Game create(String gameName, String organizerName, Date endDate) {
         String sql = "INSERT INTO game (game_name, organizer_id, end_date) " +
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_id, end_date";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerId, endDate);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
 
         if (result.next()){
             Game game = mapRowToGame(result);
@@ -77,7 +76,7 @@ public class JdbcGameDao implements GameDao {
             "WHERE game_id = ?";
 
        int rowsAffected =  jdbcTemplate.update(sql, game.getGameName(),
-                game.getOrganizerId(), game.getEndDate(), gameId);
+                game.getOrganizerName(), game.getEndDate(), gameId);
         updatedGame = get(game.getGameId());
         if(rowsAffected > 0) {
             return updatedGame;
@@ -91,7 +90,7 @@ public class JdbcGameDao implements GameDao {
     public int delete(int gameId) {
         int numRowsDeleted = 0;
         String sql0 = "DELETE FROM user_game WHERE game_id = ?";
-        String sql1 = "DELETE FROM game WHERE game_id = ?";
+        String sql1 = "DELETE FROM games WHERE game_id = ?";
 
         jdbcTemplate.update(sql0, gameId);
         numRowsDeleted = jdbcTemplate.update(sql1, gameId);
