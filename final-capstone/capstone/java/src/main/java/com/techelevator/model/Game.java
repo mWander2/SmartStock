@@ -9,18 +9,18 @@ public class Game {
     private String gameName;
     private int organizerName;
     @NotBlank(message="The field `endDate` should not be blank.")
-    private Date endDate;
+    private String endDate;
 
     public Game() {
     }
 
-    public Game(String gameName, int organizerName, Date endDate) {
+    public Game(String gameName, int organizerName, String endDate) {
         this.gameName = gameName;
         this.organizerName = organizerName;
         this.endDate = endDate;
     }
 
-    public Game(int gameId, String gameName, int organizerName, Date endDate) {
+    public Game(int gameId, String gameName, int organizerName, String endDate) {
         this.gameId = gameId;
         this.gameName = gameName;
         this.organizerName = organizerName;
@@ -51,11 +51,11 @@ public class Game {
         this.organizerName = organizerName;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
