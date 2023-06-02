@@ -25,9 +25,9 @@ public class StockService {
     @Value("${polygon.api.key}")
     private String apiKey;
 
-    public StockModel getSearchResults(String ticker) {
+    public StockModel getSearchResults(String stockTicker) {
 
-        String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
+        String url = apiUrl + "/aggs/ticker/" + stockTicker + "/prev?adjusted=false&apiKey=" + apiKey;
         System.out.println(url);
 
         HttpHeaders headers = new HttpHeaders();
@@ -49,9 +49,9 @@ public class StockService {
                 double closePrice = resultNode.path("c").asDouble();
                 int transactions = resultNode.path("n").asInt();
                 String status = resultNode.path("status").asText();
-                String resultTicker = resultNode.path("ticker").asText();
+                String ticker = resultNode.path("ticker").asText();
 
-                ResultsModel resultsModel = new ResultsModel(closePrice, transactions, status, resultTicker);
+                ResultsModel resultsModel = new ResultsModel(closePrice, transactions, status, ticker);
                 resultsList.add(resultsModel);
             }
 
@@ -60,9 +60,9 @@ public class StockService {
             String requestId = jsonNode.path("request_id").asText();
             int resultsCount = jsonNode.path("resultsCount").asInt();
             String status = jsonNode.path("status").asText();
-            String stockTicker = jsonNode.path("ticker").asText();
+            String ticker = jsonNode.path("ticker").asText();
 
-            StockModel stockModel = new StockModel(adjusted, queryCount, requestId, resultsCount, status, stockTicker, resultsList);
+            StockModel stockModel = new StockModel(adjusted, queryCount, requestId, resultsCount, status, ticker, resultsList);
             return stockModel;
 
         } catch (JsonProcessingException e) {

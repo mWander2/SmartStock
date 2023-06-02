@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.techelevator.api.model.ResultsModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +26,9 @@ public class ResultsService {
     @Value("${polygon.api.key}")
     private String apiKey;
 
+    @Autowired
+    private StockService stockService;
+
     public List<ResultsModel> getSearchResults(String ticker) {
 
         String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
@@ -42,13 +46,16 @@ public class ResultsService {
 
         try {
             jsonNode = objectMapper.readTree(response.getBody());
+            JsonNode statusNode = jsonNode.path("status");
+            JsonNode tickerNode = jsonNode.path("ticker");
             JsonNode resultsNode = jsonNode.path("results");
+
+            String status = statusNode.asText();
+            String resultTicker = tickerNode.asText();
 
             for (JsonNode resultNode : resultsNode) {
                 double closePrice = resultNode.path("c").asDouble();
                 int transactions = resultNode.path("n").asInt();
-                String status = resultNode.path("status").asText();
-                String resultTicker = resultNode.path("ticker").asText();
 
                 ResultsModel resultsModel = new ResultsModel(closePrice, transactions, status, resultTicker);
                 resultsList.add(resultsModel);

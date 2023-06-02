@@ -8,7 +8,7 @@ public class StockModel {
     private String requestId;
     private int resultsCount;
     private String status;
-    private String stockTicker;
+    private String ticker;
     private List<ResultsModel> results;
 
     public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
@@ -17,7 +17,7 @@ public class StockModel {
         this.requestId = requestId;
         this.resultsCount = resultsCount;
         this.status = status;
-        this.stockTicker = ticker;
+        this.ticker = ticker;
         this.results = results;
     }
 
@@ -61,12 +61,12 @@ public class StockModel {
         this.status = status;
     }
 
-    public String getStockTicker() {
-        return stockTicker;
+    public String getTicker() {
+        return ticker;
     }
 
-    public void setStockTicker(String stockTicker) {
-        this.stockTicker = stockTicker;
+    public void setTicker(String stockTicker) {
+        this.ticker = stockTicker;
     }
 
     public List<ResultsModel> getResults() {
