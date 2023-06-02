@@ -22,7 +22,7 @@
           </router-link>
         </div>
       </div> <!-- Move the closing </div> tag here -->
-      <button @click="showStockAnalysis">View Stock Analysis</button>
+      <button @click="showStockAnalysis">View All Stocks</button>
       <div v-if="showIframe">
         <iframe src="https://stockanalysis.com/stocks/" width="100%" height="500px"></iframe>
       </div>
@@ -126,10 +126,6 @@ export default {
   margin-left: 5px;
 }
 
-
-
-
-
 .link-btn {
   background-color: #0078d0;
   border: 0;
@@ -186,23 +182,33 @@ export default {
 iframe {
   width: 100%;
   height: 100%;
-  border: none;
+  border: 2px solid black;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #0080ff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+   background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
   cursor: pointer;
+  display: inline-block;
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  outline: 0;
+  padding: 16px 21px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
 button:hover {
-  background-color: #0059b3;
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
 }
 }
-
-
 </style>
