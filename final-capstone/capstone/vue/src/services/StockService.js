@@ -10,8 +10,8 @@ export default {
         return axios.post('/games/new', game)
     },
 
-    showMyGames() {
-        return axios.get('/username')
+    showMyGames(username) {
+        return axios.get('/username', username)
     }
 
 }

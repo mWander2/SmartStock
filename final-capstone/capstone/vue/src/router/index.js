@@ -66,7 +66,7 @@ const router = new Router({
     },
     {
       
-      path: "/my-games/",
+      path: "/my-games/:user",
       name: "my-games",
       component: MyGamesView,
       meta: {
