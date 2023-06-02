@@ -103,7 +103,7 @@ public class JdbcGameDao implements GameDao {
 
         String sql = "SELECT * " +
                 "FROM game g " +
-                "JOIN user_game ON game.game_id = user_game.game_id " +
+                "JOIN user_game ON g.game_id = user_game.game_id " +
                 "JOIN users ON users.user_id = user_game.user_id" +
                 "WHERE username = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
