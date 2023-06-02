@@ -1,6 +1,5 @@
 package com.techelevator.api.model;
 
-<<<<<<< HEAD
 import java.util.List;
 
 public class StockModel {

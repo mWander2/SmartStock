@@ -10,10 +10,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
 @Component
 public class JdbcGameDao implements GameDao {
 
