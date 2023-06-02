@@ -8,6 +8,7 @@ import store from '../store/index'
 import CreateGameView from '../views/CreateGameView.vue'
 import MyGamesView from '../views/MyGamesView.vue'
 import ViewGame from '../views/ViewGame.vue'
+import StockAnalysis from '../views/StockAnalysis.vue';
 
 Vue.use(Router)
 
@@ -74,15 +75,23 @@ const router = new Router({
       }
     },
     {
-      path: "/view-game/:id",
-      name: "view-game",
+      path: '/view-game/:id',
+      name: 'view-game',
       component: ViewGame,
       meta: {
-        requiresAuth: true
-      }
-    }
-  ]
-})
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/stock-analysis', // Add the path for stock analysis
+      name: 'stock-analysis',
+      component: StockAnalysis, // Add the StockAnalysis view component here
+      meta: {
+        requiresAuth: true,
+      },
+    },
+  ],
+});
 
 router.beforeEach((to, from, next) => {
   // Determine if the route requires Authentication

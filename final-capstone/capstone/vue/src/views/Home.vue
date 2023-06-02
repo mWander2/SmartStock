@@ -22,7 +22,9 @@
           </router-link>
         </div>
       </div> 
-      <button @click="showStockAnalysis">View All Stocks</button>
+      <router-link to="/stock-analysis">
+        <button class="link-btn">View All Stocks</button>
+      </router-link>
       <div v-if="showIframe">
         <iframe src="https://stockanalysis.com/stocks/" width="100%" height="500px"></iframe>
       </div>
