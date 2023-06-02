@@ -71,13 +71,6 @@ export default {
 
 <style scoped>
 
-/* .createGame {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-} */
-
 .form-input-group {
   margin-bottom: 1rem;
 }
@@ -89,7 +82,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40vh;
+  height: 35vh;
 
   text-align: center;
   background-color: #9daac8;
@@ -102,13 +95,13 @@ label {
   background: #cff5ea;
   border-radius: 10px;
   padding: 20px 10px 20px 0px;
-  margin-top: -20px;
+  margin-top: -10px;
   margin-bottom: 10px;
   border: 1px solid rgb(31, 31, 56);
-}
 
-.instructions h1 {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .instructions ol {

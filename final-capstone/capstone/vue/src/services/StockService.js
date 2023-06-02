@@ -9,9 +9,4 @@ export default {
     createGame(game) {
         return axios.post('/games/new', game)
     },
-
-    showMyGames(username) {
-        return axios.get('/username', username)
-    }
-
 }

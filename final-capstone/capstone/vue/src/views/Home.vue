@@ -17,7 +17,7 @@
           </router-link>
         </div>
         <div class="game-link my-games">
-          <router-link v-bind:to="{name: 'my-games', params: {user: user}}">
+          <router-link v-bind:to="{name: 'my-games'}">
             <button class="link-btn">My Games</button>
           </router-link>
         </div>
@@ -29,11 +29,6 @@
 <script>
 export default {
   name: "home",
-  data() {
-    return {
-      user : this.$store.state.user.username
-    }
-  }
 };
 </script>
 
