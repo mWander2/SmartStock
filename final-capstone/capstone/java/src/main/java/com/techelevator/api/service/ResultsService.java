@@ -1,10 +1,9 @@
 package com.techelevator.api.service;
 
-import com.techelevator.api.model.ResultsModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techelevator.api.model.StockModel;
+import com.techelevator.api.model.ResultsModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,8 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Component
-public class ApiService {
+public class ResultsService {
 
     @Value("${polygon.api.url}")
     private String apiUrl;
@@ -25,10 +25,9 @@ public class ApiService {
     @Value("${polygon.api.key}")
     private String apiKey;
 
-    public StockModel getSearchResults(String ticker) {
+    public List<ResultsModel> getSearchResults(String ticker) {
 
         String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
-        System.out.println(url);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + apiKey);
@@ -55,20 +54,10 @@ public class ApiService {
                 resultsList.add(resultsModel);
             }
 
-            boolean adjusted = jsonNode.path("adjusted").asBoolean();
-            int queryCount = jsonNode.path("queryCount").asInt();
-            String requestId = jsonNode.path("request_id").asText();
-            int resultsCount = jsonNode.path("resultsCount").asInt();
-            String status = jsonNode.path("status").asText();
-            String stockTicker = jsonNode.path("ticker").asText();
-
-            StockModel stockModel = new StockModel(adjusted, queryCount, requestId, resultsCount, status, stockTicker, resultsList);
-            return stockModel;
-
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return resultsList;
     }
 }

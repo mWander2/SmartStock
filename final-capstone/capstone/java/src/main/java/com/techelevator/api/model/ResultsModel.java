@@ -5,13 +5,13 @@ public class ResultsModel {
     private double closePrice;
     private int transactions;
     private String status;
-    private String resultTicker;
+    private String ticker;
 
     public ResultsModel(double closePrice, int transactions, String status, String ticker) {
         this.closePrice = closePrice;
         this.transactions = transactions;
         this.status = status;
-        this.resultTicker = ticker;
+        this.ticker = ticker;
     }
 
     public double getClosePrice() {
@@ -38,13 +38,11 @@ public class ResultsModel {
         this.status = status;
     }
 
-    public String getResultTicker() {
-        return resultTicker;
+    public String getTicker() {
+        return ticker;
     }
 
-    public void setResultTicker(String resultTicker) {
-        this.resultTicker = resultTicker;
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 }
-
-
