@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
       <h1>Leaderboard</h1>
       <table class="leaderboard-table">
           <tr class="head">
@@ -21,6 +21,10 @@ export default {
 </script>
 
 <style scope>
+
+h1 {
+    text-align: center;
+}
 
 .leaderboard-table tr:nth-child(odd) {
     background-color: #fff;

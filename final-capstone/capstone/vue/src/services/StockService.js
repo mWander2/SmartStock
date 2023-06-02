@@ -9,7 +9,9 @@ export default {
     createGame(game) {
         return axios.post('/games/new', game)
     },
-    getStockAnalysis() {
-        return axios.get("/stock-analysis");
-      }
+
+    getGame(id) {
+        return axios.get(`/games/${id}`)
+    }
+    
 }

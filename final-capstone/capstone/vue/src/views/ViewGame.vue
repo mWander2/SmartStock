@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import Game from '../components/Game.vue'
-import Leaderboard from '../components/Leaderboard.vue'
+import Game from '../components/Game.vue';
+import Leaderboard from '../components/Leaderboard.vue';
+
 export default {
   components: {
     Game,
     Leaderboard
-
-  }
+  },  
 }
 </script>
 
@@ -24,8 +24,8 @@ export default {
   flex-direction: column;
 }
 
-.game {
-  height: 40vh;
+.leaderboard {
+  margin-bottom: 10px;
 }
 
 </style>

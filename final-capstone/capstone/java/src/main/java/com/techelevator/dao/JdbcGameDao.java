@@ -62,9 +62,9 @@ public class JdbcGameDao implements GameDao {
                 "RETURNING game_id, game_name, organizer_name, end_date";
         String sql1 = "INSERT INTO user_game (game_id, user_id)" +
                 "VALUES((SELECT game_id FROM game WHERE game_name = ?), " +
-                "(SELECT user_id FROM user WHERE username = ?))";
+                "(SELECT user_id FROM users WHERE username = ?))";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
-        jdbcTemplate.queryForRowSet(sql1, gameName, organizerName);
+        jdbcTemplate.update(sql1, gameName, organizerName);
         if (result.next()){
             Game game = mapRowToGame(result);
             return game;
