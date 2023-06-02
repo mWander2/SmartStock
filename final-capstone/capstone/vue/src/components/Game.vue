@@ -1,4 +1,4 @@
-<template>
+<template class="test">
   <div class="game-card">
       <h1>Game Name</h1>
       <h2>Organizer</h2>
@@ -13,8 +13,10 @@ export default {
 </script>
 
 <style scope>
+
     .game-card {
         background: #9daac8;
         border-radius: 10px;
     }
+
 </style>

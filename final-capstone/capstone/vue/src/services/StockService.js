@@ -9,9 +9,7 @@ export default {
     createGame(game) {
         return axios.post('/games/new', game)
     },
-
-    showMyGames() {
-        return axios.get('')
-    }
-
+    getStockAnalysis() {
+        return axios.get("/stock-analysis");
+      }
 }

@@ -11,7 +11,7 @@
         </router-link>
       </div>
     </div>
-    <router-view />
+    <router-view class="view"/>
     <div class="footer">
       &copy;
       <img id="footer-logo-img" src="../public/img/VirtualStock.png">
