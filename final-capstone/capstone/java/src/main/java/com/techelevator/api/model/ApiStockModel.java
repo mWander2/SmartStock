@@ -2,7 +2,7 @@ package com.techelevator.api.model;
 
 import java.util.List;
 
-public class StockModel {
+public class ApiStockModel {
     private boolean adjusted;
     private int queryCount;
     private String requestId;
@@ -11,7 +11,7 @@ public class StockModel {
     private String ticker;
     private List<ResultsModel> results;
 
-    public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
+    public ApiStockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
         this.adjusted = adjusted;
         this.queryCount = queryCount;
         this.requestId = requestId;

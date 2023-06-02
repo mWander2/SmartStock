@@ -27,7 +27,7 @@ public class ResultsService {
     private String apiKey;
 
     @Autowired
-    private StockService stockService;
+    private ApiStockService stockService;
 
     public List<ResultsModel> getSearchResults(String ticker) {
 
