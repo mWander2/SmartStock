@@ -8,11 +8,7 @@ public class StockModel {
     private String requestId;
     private int resultsCount;
     private String status;
-<<<<<<< HEAD
     private String ticker;
-=======
-    private String stockTicker;
->>>>>>> main
     private List<ResultsModel> results;
 
     public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
@@ -79,9 +75,6 @@ public class StockModel {
 
     public void setResults(List<ResultsModel> results) {
         this.results = results;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
     }
 }
