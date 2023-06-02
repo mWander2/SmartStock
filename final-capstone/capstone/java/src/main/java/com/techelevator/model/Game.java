@@ -7,23 +7,23 @@ public class Game {
     private int gameId;
     @NotBlank(message = "The field `gameName` should not be blank.")
     private String gameName;
-    private int organizerId;
+    private String organizerName;
     @NotBlank(message="The field `endDate` should not be blank.")
-    private Date endDate;
+    private String endDate;
 
     public Game() {
     }
 
-    public Game(String gameName, int organizerId, Date endDate) {
+    public Game(String gameName, String organizerName, String endDate) {
         this.gameName = gameName;
-        this.organizerId = organizerId;
+        this.organizerName = organizerName;
         this.endDate = endDate;
     }
 
-    public Game(int gameId, String gameName, int organizerId, Date endDate) {
+    public Game(int gameId, String gameName, String organizerName, String endDate) {
         this.gameId = gameId;
         this.gameName = gameName;
-        this.organizerId = organizerId;
+        this.organizerName = organizerName;
         this.endDate = endDate;
     }
 
@@ -43,26 +43,26 @@ public class Game {
         this.gameName = gameName;
     }
 
-    public int getOrganizerId() {
-        return organizerId;
+    public String getOrganizerName() {
+        return organizerName;
     }
 
-    public void setOrganizerId(int organizerId) {
-        this.organizerId = organizerId;
+    public void setOrganizerName(String organizerName) {
+        this.organizerName = organizerName;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
     @Override
     public String toString() {
         return "Game{" + "gameId=" + gameId + ", gameName='" + gameName + '\''
-                + ", organizerId='" + organizerId + '\'' + ", endDate=" + endDate + '}';
+                + ", organizerName='" + organizerName + '\'' + ", endDate=" + endDate + '}';
     }
 }
 

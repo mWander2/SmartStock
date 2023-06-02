@@ -6,21 +6,24 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 @Component
 public class JdbcGameDao implements GameDao {
-    private static List<Game> games = new ArrayList<>();
-
 
     private JdbcTemplate jdbcTemplate;
     private Game mapRowToGame(SqlRowSet rs){
         Game game = new Game();
         game.setGameId(rs.getInt("game_id"));
         game.setGameName(rs.getString("game_name"));
-        game.setEndDate(rs.getDate("end_date"));
-        game.setOrganizerId(rs.getInt("organizer_id"));
+        game.setEndDate(rs.getString("end_date"));
+        game.setOrganizerName(rs.getString("organizer_name"));
         return game;
     }
 
@@ -30,8 +33,10 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public List<Game> list() {
+        List<Game> games = new ArrayList<>();
+
         String sql = "SELECT * " +
-                "FROM games g ";
+                "FROM game g ";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()){
             Game game = mapRowToGame(results);
@@ -43,7 +48,7 @@ public class JdbcGameDao implements GameDao {
     @Override
     public Game get(int gameId) {
       String sql = "SELECT * " +
-              "FROM games g " +
+              "FROM game g " +
               "WHERE g.game_id = ?";
       SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameId);
       if(result.next()){
@@ -54,12 +59,15 @@ public class JdbcGameDao implements GameDao {
     }
 
     @Override
-    public Game create(String gameName, int organizerId, Date endDate) {
-        String sql = "INSERT INTO games (game_name, organizer_id, end_date) " +
+    public Game create(String gameName, String organizerName, String endDate) {
+        String sql = "INSERT INTO game (game_name, organizer_name, end_date) " +
                 "VALUES (?, ?, ?) " +
-                "RETURNING game_id, game_name, organizer_id, end_date";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerId, endDate);
-
+                "RETURNING game_id, game_name, organizer_name, end_date";
+        String sql1 = "INSERT INTO user_game (game_id, user_id)" +
+                "VALUES((SELECT game_id FROM game WHERE game_name = ?), " +
+                "(SELECT user_id FROM user WHERE username = ?)";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
+        SqlRowSet result1 = jdbcTemplate.queryForRowSet(sql1, gameName, organizerName);
         if (result.next()){
             Game game = mapRowToGame(result);
             return game;
@@ -72,12 +80,12 @@ public class JdbcGameDao implements GameDao {
     @Override
     public Game update(Game game, int gameId) {
         Game updatedGame = null;
-    String sql = "UPDATE games " +
-            "SET game_name = ?, organizer_id = ?, end_date = ? " +
+    String sql = "UPDATE game " +
+            "SET game_name = ?, organizer_name = ?, end_date = ? " +
             "WHERE game_id = ?";
 
        int rowsAffected =  jdbcTemplate.update(sql, game.getGameName(),
-                game.getOrganizerId(), game.getEndDate(), gameId);
+                game.getOrganizerName(), game.getEndDate(), gameId);
         updatedGame = get(game.getGameId());
         if(rowsAffected > 0) {
             return updatedGame;
@@ -85,6 +93,31 @@ public class JdbcGameDao implements GameDao {
         else{
             return null;
         }
+    }
+
+    public String getUsername(Principal principal){
+        return principal.getName();
+    }
+
+
+    @Override
+    public List<Game> searchByUsername(String username) {
+        List<Game> games = new ArrayList<>();
+
+        String sql = "SELECT * " +
+                "FROM game g " +
+                "JOIN user_game ON g.game_id = user_game.game_id " +
+                "JOIN users ON users.user_id = user_game.user_id" +
+                "WHERE username = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        while(results.next()){
+            Game game = mapRowToGame(results);
+            games.add(game);
+        }
+        return games;
+
+
+
     }
 
     @Override

@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/games")
 @PreAuthorize("isAuthenticated()")
 public class GameController {
@@ -30,6 +32,23 @@ public class GameController {
         return dao.list();
     }
 
+    @RequestMapping(path = "/username", method = RequestMethod.GET)
+    public List<Game> showMyGames(Principal principal){
+        List<Game> myGames = dao.searchByUsername(principal.getName());
+        if(myGames == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else{
+            return myGames;
+        }
+    }
+
+    @RequestMapping(path = "/get", method = RequestMethod.GET)
+    public String getUsername(Principal principal){
+        return dao.getUsername(principal);
+    }
+
+
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
 //    @PreAuthorize()
     public Game get(@PathVariable int id){
@@ -42,13 +61,13 @@ public class GameController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @RequestMapping(path = "/new", method = RequestMethod.POST)
 //    @PreAuthorize()
-    public Game create(@Valid @RequestBody Game game){
+    public Game create(@Valid @RequestBody Game game, Principal principal){
         String gameName = game.getGameName();
-        int organizerId = game.getOrganizerId();
-        Date endDate = game.getEndDate();
-        return dao.create(gameName, organizerId, endDate);
+        String organizerName = principal.getName();
+        String endDate = game.getEndDate();
+        return dao.create(gameName, organizerName, endDate);
     }
 
 
