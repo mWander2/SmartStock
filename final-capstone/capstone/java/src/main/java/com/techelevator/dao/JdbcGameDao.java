@@ -128,7 +128,4 @@ public class JdbcGameDao implements GameDao {
 
         return numRowsDeleted;
     }
-
-
-
 }
