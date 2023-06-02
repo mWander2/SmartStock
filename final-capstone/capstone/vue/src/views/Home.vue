@@ -21,7 +21,7 @@
             <button class="link-btn">My Games</button>
           </router-link>
         </div>
-      </div> <!-- Move the closing </div> tag here -->
+      </div> 
       <button @click="showStockAnalysis">View All Stocks</button>
       <div v-if="showIframe">
         <iframe src="https://stockanalysis.com/stocks/" width="100%" height="500px"></iframe>
