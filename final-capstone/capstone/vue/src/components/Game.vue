@@ -82,8 +82,8 @@ export default {
   justify-content: space-between;
 }
 
-.buy-form input{
-    margin: 0px 5px;
+.buy-form input {
+  margin: 0px 5px;
 }
 
 .portfolio-container {
