@@ -21,14 +21,6 @@
             <button class="link-btn">My Games</button>
           </router-link>
         </div>
-      </div> 
-      <div class="stock-analysis-container">
-        <router-link v-bind:to="{name: 'stock-analysis'}">
-          <button class="link-btn stock-analysis-btn">View All Stocks</button>
-        </router-link>
-      </div>
-      <div v-if="showIframe">
-        <iframe src="https://stockanalysis.com/stocks/" width="100%" height="500px"></iframe>
       </div>
     </div>
   </div>
@@ -36,18 +28,8 @@
 
 <script>
 export default {
-  name: 'home',
-  data() {
-    return {
-      showIframe: false
-    };
-  },
-  methods: {
-    showStockAnalysis() {
-      this.showIframe = true;
-    }
-  }
-}
+  name: "home",
+};
 </script>
 
 <style scoped>
@@ -170,72 +152,12 @@ export default {
   transform: scale(1.05);
 }
 
-.stock-analysis-container {
-  display: flex;
-  justify-content: center;
-  background-image: url("../../public/img/NavyAndBlueStock.png");
-  background-size: cover;
-  background-position: center;
-  border: 1px solid rgb(31, 31, 56);
-}
-
-.stock-analysis-btn {
-  background-color: #0078d0;
-  border: 0;
-  border-radius: 56px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  outline: 0;
-  padding: 16px 21px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transition: all .3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.stock-analysis-btn:before {
-  background-color: initial;
-  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-  border-radius: 125px;
-  content: "";
-  height: 50%;
-  left: 4%;
-  opacity: .5;
-  position: absolute;
-  top: 0;
-  transition: all .3s;
-  width: 92%; 
-}
-
-.stock-analysis-btn:hover {
-  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
-  transform: scale(1.05);
-}
-
 @media (min-width: 768px) {
   .link-btn {
     padding: 16px 48px;
   }
-
-  .iframe-container {
-  width: 100%;
-  height: 500px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
 }
 
-iframe {
-  width: 100%;
-  height: 100%;
-  border: 2px solid black;
-}
-}
+
 </style>
+
