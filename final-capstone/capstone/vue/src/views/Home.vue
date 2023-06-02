@@ -21,6 +21,10 @@
             <button class="link-btn">My Games</button>
           </router-link>
         </div>
+      </div> <!-- Move the closing </div> tag here -->
+      <button @click="showStockAnalysis">View Stock Analysis</button>
+      <div v-if="showIframe">
+        <iframe src="https://stockanalysis.com/stocks/" width="100%" height="500px"></iframe>
       </div>
     </div>
   </div>
@@ -28,8 +32,18 @@
 
 <script>
 export default {
-  name: "home"
-};
+  name: 'home',
+  data() {
+    return {
+      showIframe: false
+    };
+  },
+  methods: {
+    showStockAnalysis() {
+      this.showIframe = true;
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -160,6 +174,34 @@ export default {
   .link-btn {
     padding: 16px 48px;
   }
+
+  .iframe-container {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #0080ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0059b3;
+}
 }
 
 
