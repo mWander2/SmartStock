@@ -21,6 +21,10 @@ public class StockModel {
         this.results = results;
     }
 
+    public StockModel() {
+
+    }
+
     public boolean isAdjusted() {
         return adjusted;
     }
