@@ -21,11 +21,7 @@
             <button class="link-btn">My Games</button>
           </router-link>
         </div>
-<<<<<<< HEAD
-      </div>
-=======
       </div> 
->>>>>>> main
     </div>
   </div>
 </template>
@@ -160,13 +156,7 @@ export default {
   .link-btn {
     padding: 16px 48px;
   }
-<<<<<<< HEAD
-}
-
-
-=======
 
 }
->>>>>>> main
 </style>
 
