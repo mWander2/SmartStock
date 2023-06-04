@@ -16,9 +16,9 @@
         <label for="password">Password</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
-      <button type="submit">Sign in</button>
+      <button type="submit" id="sign-in">Sign In</button>
       <p>
-        <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link>
+        <router-link :to="{ name: 'register' }" id="account">Need an account? Sign up.</router-link>
       </p>
     </form>
   </div>
@@ -78,9 +78,21 @@ label {
   flex-basis: 65%;
   text-align: center;
   width: 60%;
-  background-color: #9daac8;
-  color: rgb(31, 31, 56);
+  background-color: #072f50;
+  color: white;
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
   border-radius: 10px;
+}
+#account{
+  color: white;
+  text-decoration: none;
+}
+#account:hover {
+  text-decoration: underline;
+}
+
+#sign-in{
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
 }
 
 </style>

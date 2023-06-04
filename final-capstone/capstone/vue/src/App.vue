@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+  
       <img id="banner-logo-img" src="../public/img/VirtualStock.png">
       <div class="links">
         <router-link v-bind:to="{ name: 'home' }">
@@ -33,47 +34,61 @@
 
   #nav {
     margin-bottom: 20px;
-    background-color: rgb(31, 31, 56);
-    padding: 10px;
+    background-color: #072f50;
+    padding: 1px;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky; top: 0;
+    background-color: #072f50;
+  color: #fff;
+  padding: 5px 5px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  margin-top: -15px;
   }
 
-  #nav button {
-    border-radius: 7px;
-    background-color: #9daac8;
-    font-weight: bold;
+  .logo {
+    display: flex;
+    align-items: center;
   }
 
   #banner-logo-img {
     height: 50px;
     border-radius: 10px;
+    margin-right: 10px;
   }
 
   .links {
     display: flex;
-    justify-content: center;
     align-items: center;
   }
 
   .centered-button {
-    margin: 0 5px; /* Optional: Adjust the margin as needed */
+    margin: 0 5px; 
     padding: 5px 10px;
     font-size: 14px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+  }
+
+  .centered-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .footer {
-    background-color: rgb(31, 31, 56);
+    background-color: #072f50;
     color: #cff5ea;
     display: flex;
     padding: 5px;
     border-radius: 5px;
   }
 
-   #footer-logo-img {
+  #footer-logo-img {
     height: 20px;
     border-radius: 10px;
     margin-left: 5px;
