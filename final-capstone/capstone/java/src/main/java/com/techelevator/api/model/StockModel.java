@@ -8,16 +8,16 @@ public class StockModel {
     private String requestId;
     private int resultsCount;
     private String status;
-    private String ticker;
+    private String symbol;
     private List<ResultsModel> results;
 
-    public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
+    public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String symbol, List<ResultsModel> results) {
         this.adjusted = adjusted;
         this.queryCount = queryCount;
         this.requestId = requestId;
         this.resultsCount = resultsCount;
         this.status = status;
-        this.ticker = ticker;
+        this.symbol = symbol;
         this.results = results;
     }
 
@@ -65,12 +65,12 @@ public class StockModel {
         this.status = status;
     }
 
-    public String getTicker() {
-        return ticker;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setTicker(String stockTicker) {
-        this.ticker = stockTicker;
+    public void setSymbol(String stockSymbol) {
+        this.symbol = stockSymbol;
     }
 
     public List<ResultsModel> getResults() {
