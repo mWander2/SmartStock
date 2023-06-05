@@ -1,8 +1,10 @@
 package com.techelevator.api.model;
 
+import java.math.BigDecimal;
+
 public class ResultsModel {
 
-    private double close;
+    private BigDecimal close;
     private long volume;
     private String status;
     private String symbol;
@@ -11,18 +13,18 @@ public class ResultsModel {
 
     }
 
-    public ResultsModel(double close, long volume, String status, String symbol) {
+    public ResultsModel(BigDecimal close, long volume, String status, String symbol) {
         this.close = close;
         this.volume = volume;
         this.status = status;
         this.symbol = symbol;
     }
 
-    public double getClose() {
+    public BigDecimal getClose() {
         return close;
     }
 
-    public void setClose(double close) {
+    public void setClose(BigDecimal close) {
         this.close = close;
     }
 

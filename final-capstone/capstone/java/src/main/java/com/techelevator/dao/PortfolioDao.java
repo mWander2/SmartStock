@@ -22,7 +22,9 @@ public interface PortfolioDao {
 //
 //    int delete (int gameId, int userId);
 
+
     Portfolio getPortfolioByUser(String username, int gameId);
+    PortfolioStocks getPortfolioStocksById(int id);
     List<PortfolioStocks> getPortfolioStocks(String username, int gameId);
     void buy(PortfolioStocks stock, BigDecimal cost, String username, int gameId);
     void sell(BigDecimal cost, String username, int gameId, int stockId);

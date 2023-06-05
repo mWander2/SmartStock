@@ -184,7 +184,6 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
 
 
-
     @Override
     public Portfolio getPortfolioByUser(String username, int gameId) {
         Portfolio portfolio = null;
@@ -196,6 +195,17 @@ public class JdbcPortfolioDao implements PortfolioDao {
             portfolio = mapRowToPortfolio(results);
         }
         return portfolio;
+    }
+
+    @Override
+    public PortfolioStocks getPortfolioStocksById(int id) {
+        PortfolioStocks pS = null;
+        String sql = "SELECT * FROM portfolio_stocks WHERE portfolio_stock_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        if(results.next()) {
+            pS = mapRowToPortfolioStocks(results);
+        }
+        return pS;
     }
 
     @Override
@@ -222,6 +232,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
         jdbcTemplate.update(portfolioStockSql, username, gameId, stock.getTicker(), stock.getQuantity());
 
         BigDecimal currentBalance = getPortfolioByUser(username, gameId).getCashBalance();
+        cost = cost.multiply(new BigDecimal(stock.getQuantity()));
         BigDecimal newBalance = currentBalance.subtract(cost);
         String portfolioSql = "UPDATE portfolio SET cash_balance = ?\n" +
                 "WHERE game_id = ? AND user_id = (SELECT user_id FROM users WHERE username = ?)";
@@ -230,10 +241,13 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
     @Override
     public void sell(BigDecimal cost, String username, int gameId, int stockId) {
+        int quantity = getPortfolioStocksById(stockId).getQuantity();
+
         String portfolioStockSql = "DELETE FROM portfolio_stocks WHERE portfolio_stock_id = ?";
         jdbcTemplate.update(portfolioStockSql, stockId);
 
         BigDecimal currentBalance = getPortfolioByUser(username, gameId).getCashBalance();
+        cost = cost.multiply(new BigDecimal(quantity));
         BigDecimal newBalance = currentBalance.add(cost);
         String portfolioSql = "UPDATE portfolio SET cash_balance = ?\n" +
                 "WHERE game_id = ? AND user_id = (SELECT user_id FROM users WHERE username = ?)";
