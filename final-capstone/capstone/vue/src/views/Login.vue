@@ -71,17 +71,16 @@ label {
 }
 
 #login {
-  display: flex;
+   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
-  flex-basis: 65%;
+  height: 60vh;
+
   text-align: center;
-  width: 60%;
-  background-color: #072f50;
+  background-color: #052641;
   color: white;
-  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  border: 1px solid black;
 }
 #account{
   color: white;
@@ -93,6 +92,18 @@ label {
 
 #sign-in{
   font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+   background-color: #052641;
+    font-weight: bold;
+    color: white;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
 }
 
+#sign-in:hover{
+   box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+}
 </style>

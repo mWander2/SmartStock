@@ -17,8 +17,8 @@
         <label for="confirmPassword">Confirm Password</label>
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
-      <button type="submit">Create Account</button>
-      <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      <button type="submit" id="create-account">Create Account</button>
+      <p><router-link :to="{ name: 'login' }" id="account">Already have an account? Log in.</router-link></p>
     </form>
   </div>
 </template>
@@ -84,12 +84,36 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
-  flex-basis: 65%;
+  height: 60vh;
+
   text-align: center;
-  width: 60%;
-  background-color: #9daac8;
-  color: rgb(31, 31, 56);
-  border-radius: 10px;
+  background-color: #052641;
+  color: white;
+  /* border-radius: 10px; */
+  border: 1px solid black;
+}
+#account{
+  color: white;
+  text-decoration: none;
+}
+#account:hover {
+  text-decoration: underline;
+}
+
+#create-account{
+  font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+   background-color: #052641;
+    font-weight: bold;
+    color: white;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#create-account:hover{
+   box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
 }
 </style>

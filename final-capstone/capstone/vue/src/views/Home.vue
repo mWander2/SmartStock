@@ -48,7 +48,7 @@ export default {
   }
 
   .home{
-    background-color: transparent;
+    background-color: rgb(209, 201, 201);
   }
 
   .header {
@@ -58,7 +58,7 @@ export default {
     text-align: center;
     /* border-radius: 10px; */
     margin-bottom: 5px;
-    margin-top: -45px;
+    margin-top: -20px;
     border: solid 1px #052641
   }
 
@@ -95,6 +95,7 @@ export default {
     background-size: cover;
     background-position: bottom 50%;
     /* border: solid 1.5px; */
+    margin-bottom: 0px;
   
   }
 
