@@ -95,8 +95,9 @@ export default {
     background-size: cover;
     background-position: bottom 50%;
     /* border: solid 1.5px; */
-    margin-bottom: 0px;
+    margin-bottom: -15px;
     border: solid 1px;
+    height: 80vh
   }
 
   .inner-link-container {
@@ -124,7 +125,8 @@ export default {
     /* margin-right: 5px; */
     /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\c7fda15d5f26108c27845deb28afa9dc.jpg"); */
     align-items: center;
-    margin-bottom: -10px;
+    margin-bottom: -25px;
+    
     height: 12vh
   }
 
@@ -137,7 +139,7 @@ export default {
     align-items: center;
     border: black 1px;
     border: solid 1px;
-    margin-bottom: -10px;
+    margin-bottom: -25px;
     height: 12vh;
   }
 
