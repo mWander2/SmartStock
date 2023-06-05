@@ -7,6 +7,10 @@ public class ResultsModel {
     private String status;
     private String ticker;
 
+    public ResultsModel() {
+
+    }
+
     public ResultsModel(double closePrice, int transactions, String status, String ticker) {
         this.closePrice = closePrice;
         this.transactions = transactions;

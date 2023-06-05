@@ -67,4 +67,36 @@ public class ResultsService {
 
         return resultsList;
     }
+
+    public ResultsModel getResultObject(String ticker) {
+        String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + apiKey);
+
+        HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
+        JsonNode jsonNode;
+        ResultsModel resultsModel = new ResultsModel();
+        try {
+            jsonNode = objectMapper.readTree(response.getBody());
+            JsonNode statusNode = jsonNode.path("status");
+            JsonNode tickerNode = jsonNode.path("ticker");
+            JsonNode resultsNode = jsonNode.path("results");
+            resultsModel.setStatus(statusNode.asText());
+
+            resultsModel.setTicker(tickerNode.asText());
+            for(JsonNode result : resultsNode) {
+                resultsModel.setClosePrice(result.path("c").asDouble());
+                resultsModel.setTransactions(result.path("n").asInt());
+            }
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return resultsModel;
+    }
 }

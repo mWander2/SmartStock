@@ -7,6 +7,6 @@ INSERT INTO game (game_name, organizer_name, end_date) VALUES ('test game', 'use
 
 INSERT INTO user_game (game_id, user_id) VALUES (1, 1);
 
-INSERT INTO portfolio (game_id, user_id) VALUES (1, 1);
+INSERT INTO portfolio (game_id, user_id, cash_balance) VALUES (1, 1, 100000);
 
 COMMIT TRANSACTION;
