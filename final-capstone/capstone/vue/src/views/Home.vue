@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="header">
-      <h1>Learning Today, Earning Tomorrow.</h1>
-      <h2>Virtual Stock Empowers Investors through Education</h2>
+      <h1>Learning Today, Earning Tomorrow</h1>
+      <h2>SmartStock Empowers Investors through Education</h2>
     </div>
     <div class="link-container">
       <div class="link stock-link">
@@ -52,9 +52,9 @@ export default {
     color: #fff;
     padding: 5px 5px;
     text-align: center;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     margin-bottom: 5px;
-    margin-top: 5px;
+    margin-top: -15px;
   }
 
   h1 {
@@ -75,7 +75,7 @@ export default {
   }
 
   .link {
-    border-radius: 10px;
+    /* border-radius: 10px; */
     margin-bottom: 10px;
     height: 100%;
 
@@ -85,8 +85,8 @@ export default {
   }
 
   .stock-link {
-    background-color: #072f50;
-    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg");
+    background-color: transparent;
+    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\stock-market-graph-design-on-white-background-vector.jpg");
     background-size: cover;
     background-position: center;
     border: solid 1px
@@ -111,16 +111,16 @@ export default {
   }
 
   .create-game {
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
     background-size: cover;
       background-position: center;
     /* margin-right: 5px; */
-    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg");
+    /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg"); */
     align-items: center;
   }
 
   .my-games {
-    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg");
+    /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg"); */
     background-size: cover;
     background-position: center;
     margin-left: 5px;

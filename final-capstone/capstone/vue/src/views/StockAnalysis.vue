@@ -1,6 +1,5 @@
 <template>
   <div class="stock-analysis">
-    <h1>Stock Analysis</h1>
     <div class="iframe-container">
       <iframe :src="stockAnalysisUrl" width="100%" height="500px"></iframe>
     </div>
@@ -25,9 +24,8 @@ export default {
 
 .iframe-container {
   width: 100%;
-  height: 500px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  height: 700px;
+  border: 1px solid black;
   overflow: hidden;
 }
 

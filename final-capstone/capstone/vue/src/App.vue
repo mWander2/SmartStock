@@ -35,7 +35,7 @@
     margin-bottom: 20px;
     background-color: #052641;
     padding: 10px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,15 +43,16 @@
   }
 
   .home-button, .logout-button {
-    border-radius: 7px;
+    /* border-radius: 7px; */
     background-color: #052641;
     font-weight: bold;
     color: white;
-    border: none;
+    border: solid 1px;
     cursor: pointer;
     padding: 5px 10px;
     font-size: 14px;
     text-decoration: none;
+
   }
 
   .home-button:hover, .logout-button:hover {
@@ -75,7 +76,7 @@
     color: #cff5ea;
     display: flex;
     padding: 5px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
   }
 
   #footer-logo-img {
