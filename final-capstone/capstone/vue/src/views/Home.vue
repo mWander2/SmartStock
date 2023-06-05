@@ -48,7 +48,7 @@ export default {
   }
 
   .home{
-    background-color: rgb(209, 201, 201);
+    background-color: white;
   }
 
   .header {
@@ -58,7 +58,7 @@ export default {
     text-align: center;
     /* border-radius: 10px; */
     margin-bottom: 5px;
-    margin-top: -20px;
+    margin-top: -15px;
     border: solid 1px #052641
   }
 
@@ -96,7 +96,7 @@ export default {
     background-position: bottom 50%;
     /* border: solid 1.5px; */
     margin-bottom: 0px;
-  
+    border: solid 1px;
   }
 
   .inner-link-container {
@@ -124,7 +124,7 @@ export default {
     /* margin-right: 5px; */
     /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\c7fda15d5f26108c27845deb28afa9dc.jpg"); */
     align-items: center;
-    margin-bottom: 0px;
+    margin-bottom: -10px;
     height: 12vh
   }
 
@@ -137,7 +137,7 @@ export default {
     align-items: center;
     border: black 1px;
     border: solid 1px;
-    margin-bottom: px;
+    margin-bottom: -10px;
     height: 12vh;
   }
 
