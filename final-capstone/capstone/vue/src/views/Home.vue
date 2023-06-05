@@ -58,7 +58,7 @@ export default {
     text-align: center;
     /* border-radius: 10px; */
     margin-bottom: 5px;
-    margin-top: -45px;
+    margin-top: -30px;
     border: solid 1px #052641
   }
 
