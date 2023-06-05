@@ -48,7 +48,7 @@ export default {
   }
 
   .header {
-    background-color: #072f50;
+    background-color: #052641;
     color: #fff;
     padding: 5px 5px;
     text-align: center;
@@ -78,7 +78,6 @@ export default {
     border-radius: 10px;
     margin-bottom: 10px;
     height: 100%;
-    opacity: 75%;
 
     display: flex;
     align-items: center;
@@ -87,17 +86,17 @@ export default {
 
   .stock-link {
     background-color: #072f50;
-    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\PickPer-uptrend-101416-iStock.jpg");
+    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg");
     background-size: cover;
     background-position: center;
-    border: 1px solid #272769;
+    border: solid 1px
   }
 
   .inner-link-container {
     display: flex;
     /* background-image: linear-gradient(rgb(31, 31, 56), #cff5ea); */
 
-    height: 75%;
+    height: 100%;
     justify-content: space-around;
   }
 
@@ -105,32 +104,41 @@ export default {
     background-color: black;
     height: 100%;
     width: 100%;
-    border-radius: 5px;
-    border: 1px solid rgb(31, 31, 56);
     display: flex;
     align-items: center;
     justify-content: center;
+    border: solid 1px
   }
 
   .create-game {
-    background-image: url("../../public/img/CreateGame.jpg");
+    background-color: rgb(255, 255, 255);
     background-size: cover;
-    background-position: center;
-    margin-right: 5px;
+      background-position: center;
+    /* margin-right: 5px; */
+    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg");
+    align-items: center;
   }
 
   .my-games {
-    background-image: url("../../public/img/MyGames.jpg");
+    background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg");
     background-size: cover;
     background-position: center;
     margin-left: 5px;
+    background-color: white;
+    align-items: center;
+    border: black 1px;
+    border: solid 1px
   }
 
   .link-btn {
-    background-color: #022038;
     border: 0;
-    border-radius: 56px;
-    color: #fff;
+    border: 1px solid #052641; 
+    background-color: white; 
+    border-radius: 0; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    color: #052641; 
+    cursor: pointer;
     cursor: pointer;
     display: inline-block;
     font-size: 18px;
