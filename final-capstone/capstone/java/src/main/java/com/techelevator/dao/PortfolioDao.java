@@ -26,6 +26,6 @@ public interface PortfolioDao {
     Portfolio getPortfolioByUser(String username, int gameId);
     PortfolioStocks getPortfolioStocksById(int id);
     List<PortfolioStocks> getPortfolioStocks(String username, int gameId);
-    void buy(PortfolioStocks stock, double cost, String username, int gameId);
-    void sell(double cost, String username, int gameId, int stockId);
+    void buy(PortfolioStocks stock, BigDecimal cost, String username, int gameId);
+    void sell(BigDecimal cost, String username, int gameId, int stockId);
 }

@@ -19,35 +19,35 @@ public class StockController {
     @Autowired
     ResultsService resultsService;
 
-    @GetMapping("/stock")
-    public ResponseEntity<?> search(@RequestParam(required = false) String ticker) {
-        if (ticker == null || ticker.isEmpty()) {
-            return ResponseEntity.badRequest().body("Ticker parameter is missing");
-        }
-
-        StockModel stockModel = stockService.getSearchResults(ticker);
-
-        if (stockModel == null || stockModel.getResults().isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(stockModel);
-    }
-
-    @GetMapping("/results")
-    public ResponseEntity<?> results(@RequestParam(required = false) String ticker) {
-        if (ticker == null || ticker.isEmpty()) {
-            return ResponseEntity.badRequest().body("Ticker parameter is missing");
-        }
-
-        List<ResultsModel> resultsList = resultsService.getSearchResults(ticker);
-
-        if (resultsList == null || resultsList.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(resultsList);
-    }
+//    @GetMapping("/stock")
+//    public ResponseEntity<?> search(@RequestParam(required = false) String ticker) {
+//        if (ticker == null || ticker.isEmpty()) {
+//            return ResponseEntity.badRequest().body("Ticker parameter is missing");
+//        }
+//
+//        StockModel stockModel = stockService.getSearchResults(ticker);
+//
+//        if (stockModel == null || stockModel.getResults().isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        return ResponseEntity.ok(stockModel);
+//    }
+//
+//    @GetMapping("/results")
+//    public ResponseEntity<?> results(@RequestParam(required = false) String ticker) {
+//        if (ticker == null || ticker.isEmpty()) {
+//            return ResponseEntity.badRequest().body("Ticker parameter is missing");
+//        }
+//
+//        List<ResultsModel> resultsList = resultsService.getSearchResults(ticker);
+//
+//        if (resultsList == null || resultsList.isEmpty()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        return ResponseEntity.ok(resultsList);
+//    }
 
     @GetMapping("/resultsObject")
     public ResponseEntity<?> getResultObject(@RequestParam(required = false) String ticker) {

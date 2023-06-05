@@ -6,7 +6,7 @@
       <h2>Organized By: <br />{{ game.organizerName }}</h2>
     </div>
     <div class="buy-info">
-      <span>Available Funds: ${{portfolio.cashBalance}}</span>
+      <span>Available Funds: ${{portfolio.cashBalance?.toFixed(2)}}</span>
       <form class="buy-form" v-on:submit.prevent="buy">
         <input type="text" placeholder="AAPL" v-model="stock.ticker"/>
         <input type="number" placeholder="Quantity" v-model="stock.quantity"/>
