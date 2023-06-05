@@ -2,7 +2,7 @@ package com.techelevator.api.model;
 
 import java.util.List;
 
-public class ApiStockModel {
+public class StockModel {
     private boolean adjusted;
     private int queryCount;
     private String requestId;
@@ -11,11 +11,7 @@ public class ApiStockModel {
     private String symbol;
     private List<ResultsModel> results;
 
-<<<<<<< HEAD:final-capstone/capstone/java/src/main/java/com/techelevator/api/model/ApiStockModel.java
-    public ApiStockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
-=======
     public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String symbol, List<ResultsModel> results) {
->>>>>>> main:final-capstone/capstone/java/src/main/java/com/techelevator/api/model/StockModel.java
         this.adjusted = adjusted;
         this.queryCount = queryCount;
         this.requestId = requestId;

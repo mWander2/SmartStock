@@ -1,7 +1,7 @@
 package com.techelevator.api.controller;
 
 import com.techelevator.api.model.ResultsModel;
-import com.techelevator.api.model.ApiStockModel;
+import com.techelevator.api.model.StockModel;
 import com.techelevator.api.service.ResultsService;
 import com.techelevator.api.service.ApiStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-public class ApiStockController {
+public class StockController {
 
     @Autowired
     ApiStockService stockService;
@@ -25,7 +25,7 @@ public class ApiStockController {
             return ResponseEntity.badRequest().body("Ticker parameter is missing");
         }
 
-        ApiStockModel stockModel = stockService.getSearchResults(ticker);
+        StockModel stockModel = stockService.getSearchResults(ticker);
 
         if (stockModel == null || stockModel.getResults().isEmpty()) {
             return ResponseEntity.notFound().build();

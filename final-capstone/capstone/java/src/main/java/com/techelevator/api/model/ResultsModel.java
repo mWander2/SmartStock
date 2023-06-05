@@ -49,4 +49,13 @@ public class ResultsModel {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+
+    public void setTicker(String asText) {
+    }
+
+    public void setClosePrice(double c) {
+    }
+
+    public void setTransactions(int n) {
+    }
 }

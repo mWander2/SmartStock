@@ -4,7 +4,7 @@ import com.techelevator.api.model.ResultsModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.techelevator.api.model.ApiStockModel;
+import com.techelevator.api.model.StockModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +25,7 @@ public class ApiStockService {
     @Value("${polygon.api.key}")
     private String apiKey;
 
-    public ApiStockModel getSearchResults(String stockTicker) {
+    public StockModel getSearchResults(String stockTicker) {
 
         String url = apiUrl + "/aggs/ticker/" + stockTicker + "/prev?adjusted=false&apiKey=" + apiKey;
         System.out.println(url);
@@ -62,7 +62,7 @@ public class ApiStockService {
             String status = jsonNode.path("status").asText();
             String ticker = jsonNode.path("ticker").asText();
 
-            ApiStockModel stockModel = new ApiStockModel(adjusted, queryCount, requestId, resultsCount, status, ticker, resultsList);
+            StockModel stockModel = new StockModel(adjusted, queryCount, requestId, resultsCount, status, ticker, resultsList);
             return stockModel;
 
         } catch (JsonProcessingException e) {
