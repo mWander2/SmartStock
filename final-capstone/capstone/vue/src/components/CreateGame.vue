@@ -102,7 +102,8 @@ label {
 }
 
 #create:hover{
-  background-color: #06497b;
+   box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
 }
 
 #end{
@@ -126,19 +127,17 @@ label {
 }
 
 .instructions {
-  background: #cff5ea;
   /* border-radius: 10px; */
   padding: 20px 10px 20px 0px;
   margin-top: -10px;
   margin-bottom: 10px;
   border: 1px solid rgb(31, 31, 56);
-
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .instructions ol {
-  line-height: 2;
+  line-height: 3;
 }
 </style>

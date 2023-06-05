@@ -43,7 +43,6 @@
   }
 
   .home-button, .logout-button {
-    /* border-radius: 7px; */
     background-color: #052641;
     font-weight: bold;
     color: white;
@@ -56,8 +55,10 @@
   }
 
   .home-button:hover, .logout-button:hover {
-    background-color: #06497b;
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
   }
+
 
   #banner-logo-img {
     height: 50px;

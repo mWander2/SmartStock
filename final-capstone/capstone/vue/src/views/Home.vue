@@ -47,14 +47,19 @@ export default {
     font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
   }
 
+  .home{
+    background-color: transparent;
+  }
+
   .header {
     background-color: #052641;
-    color: #fff;
+    color: white;
     padding: 5px 5px;
     text-align: center;
     /* border-radius: 10px; */
     margin-bottom: 5px;
-    margin-top: -15px;
+    margin-top: -45px;
+    border: solid 1px #052641
   }
 
   h1 {
@@ -71,7 +76,7 @@ export default {
   .link-container {
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    height: 90vh;
   }
 
   .link {
@@ -88,15 +93,16 @@ export default {
     background-color: transparent;
     background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\stock-market-graph-design-on-white-background-vector.jpg");
     background-size: cover;
-    background-position: center;
-    border: solid 1px
+    background-position: bottom 50%;
+    /* border: solid 1.5px; */
+  
   }
 
   .inner-link-container {
     display: flex;
     /* background-image: linear-gradient(rgb(31, 31, 56), #cff5ea); */
 
-    height: 100%;
+    height: 15vh;
     justify-content: space-around;
   }
 
@@ -117,6 +123,8 @@ export default {
     /* margin-right: 5px; */
     /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\c7fda15d5f26108c27845deb28afa9dc.jpg"); */
     align-items: center;
+    margin-bottom: 0px;
+    height: 12vh
   }
 
   .my-games {
@@ -127,7 +135,9 @@ export default {
     background-color: #052641;
     align-items: center;
     border: black 1px;
-    border: solid 1px
+    border: solid 1px;
+    margin-bottom: px;
+    height: 12vh;
   }
 
   .link-btn {
