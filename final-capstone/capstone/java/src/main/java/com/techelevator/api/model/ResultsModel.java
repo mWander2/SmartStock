@@ -2,32 +2,36 @@ package com.techelevator.api.model;
 
 public class ResultsModel {
 
-    private double closePrice;
-    private int transactions;
+    private double close;
+    private long volume;
     private String status;
-    private String ticker;
+    private String symbol;
 
-    public ResultsModel(double closePrice, int transactions, String status, String ticker) {
-        this.closePrice = closePrice;
-        this.transactions = transactions;
+    public ResultsModel() {
+
+    }
+
+    public ResultsModel(double close, long volume, String status, String symbol) {
+        this.close = close;
+        this.volume = volume;
         this.status = status;
-        this.ticker = ticker;
+        this.symbol = symbol;
     }
 
-    public double getClosePrice() {
-        return closePrice;
+    public double getClose() {
+        return close;
     }
 
-    public void setClosePrice(double closePrice) {
-        this.closePrice = closePrice;
+    public void setClose(double close) {
+        this.close = close;
     }
 
-    public int getTransactions() {
-        return transactions;
+    public long getVolume() {
+        return volume;
     }
 
-    public void setTransactions(int transactions) {
-        this.transactions = transactions;
+    public void setVolume(long volume) {
+        this.volume = volume;
     }
 
     public String getStatus() {
@@ -38,11 +42,11 @@ public class ResultsModel {
         this.status = status;
     }
 
-    public String getTicker() {
-        return ticker;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setTicker(String ticker) {
-        this.ticker = ticker;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }

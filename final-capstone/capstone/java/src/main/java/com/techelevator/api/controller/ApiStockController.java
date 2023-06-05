@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ApiStockController {
 
@@ -46,6 +47,18 @@ public class ApiStockController {
         }
 
         return ResponseEntity.ok(resultsList);
+    }
+
+    @GetMapping("/resultsObject")
+    public ResponseEntity<?> getResultObject(@RequestParam(required = false) String ticker) {
+        if (ticker == null || ticker.isEmpty()) {
+            return ResponseEntity.badRequest().body("Ticker parameter is missing");
+        }
+        ResultsModel resultsModel = resultsService.getResultObject(ticker);
+        if (resultsModel == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(resultsModel);
     }
 }
 

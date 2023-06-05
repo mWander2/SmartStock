@@ -8,16 +8,20 @@ public class ApiStockModel {
     private String requestId;
     private int resultsCount;
     private String status;
-    private String ticker;
+    private String symbol;
     private List<ResultsModel> results;
 
+<<<<<<< HEAD:final-capstone/capstone/java/src/main/java/com/techelevator/api/model/ApiStockModel.java
     public ApiStockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String ticker, List<ResultsModel> results) {
+=======
+    public StockModel(boolean adjusted, int queryCount, String requestId, int resultsCount, String status, String symbol, List<ResultsModel> results) {
+>>>>>>> main:final-capstone/capstone/java/src/main/java/com/techelevator/api/model/StockModel.java
         this.adjusted = adjusted;
         this.queryCount = queryCount;
         this.requestId = requestId;
         this.resultsCount = resultsCount;
         this.status = status;
-        this.ticker = ticker;
+        this.symbol = symbol;
         this.results = results;
     }
 
@@ -65,12 +69,12 @@ public class ApiStockModel {
         this.status = status;
     }
 
-    public String getTicker() {
-        return ticker;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setTicker(String stockTicker) {
-        this.ticker = stockTicker;
+    public void setSymbol(String stockSymbol) {
+        this.symbol = stockSymbol;
     }
 
     public List<ResultsModel> getResults() {

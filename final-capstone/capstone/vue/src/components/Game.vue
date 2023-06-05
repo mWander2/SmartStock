@@ -6,11 +6,11 @@
       <h2>Organized By: <br />{{ game.organizerName }}</h2>
     </div>
     <div class="buy-info">
-      <span>Available Funds: $$$$$$</span>
-      <form class="buy-form">
-        <input type="text" placeholder="AAPL" />
-        <input type="number" placeholder="Quantity" />
-        <button class="buy">Buy</button>
+      <span>Available Funds: ${{portfolio.cashBalance}}</span>
+      <form class="buy-form" v-on:submit.prevent="buy">
+        <input type="text" placeholder="AAPL" v-model="stock.ticker"/>
+        <input type="number" placeholder="Quantity" v-model="stock.quantity"/>
+        <button type="submit" class="buy">Buy</button>
       </form>
     </div>
     <div class="portfolio-container">
@@ -21,11 +21,13 @@
           <th>Value</th>
           <th></th>
         </tr>
-        <tr class="row" v-for="i in 10" v-bind:key="i">
-          <td>Ticker {{ i }}</td>
-          <td>###</td>
+        <tr class="row" v-for="stockPortfolio in stockList" v-bind:key="stockPortfolio.id">
+          <td>{{stockPortfolio.ticker}}</td>
+          <td>{{stockPortfolio.quantity}}</td>
           <td>$$$$$$</td>
-          <td class="sell-row"><button class="sell">Sell</button></td>
+          <td class="sell-row">
+            <button class="sell" v-on:click="sell(stockPortfolio)">Sell</button>
+          </td>
         </tr>
       </table>
     </div>
@@ -34,16 +36,56 @@
 
 <script>
 import stockService from "../services/StockService.js";
+// import polygonService from "../services/PolygonService.js"
 export default {
   data() {
     return {
-      game: {},
+      gameId : this.$route.params.id,
+      game : {},
+      portfolio : {},
+      stockList : [],
+      stock : {
+        ticker : "",
+        quantity : "",
+      },
     };
   },
+  methods: {
+    buy() { //COST CURRENTLY HARDCODED
+      stockService.buy(this.stock, 500, this.gameId).then(
+        response => {
+          if(response.status == 200) {
+            alert('Your purchase was successful!');
+            this.$router.go();
+          }
+        }
+      );
+    },
+    sell(stockPortfolio) { //COST CURRENTLY HARDCODED
+      stockService.sell(500, this.gameId, stockPortfolio.id).then(
+        response => {
+          if(response.status == 200) {
+            alert('Your sale was succesful!');
+            this.$router.go();
+          }
+        }
+      )
+    }
+  },
   created() {
-    const id = this.$route.params.id;
-    stockService.getGame(id).then((response) => {
-      this.game = response.data;
+    stockService.getGame(this.gameId).then(
+      response => {
+        this.game = response.data;
+    });
+    
+    stockService.getPortfolio(this.gameId).then(
+      response => {
+        this.portfolio = response.data;
+    });
+
+    stockService.getPortfolioStocks(this.gameId).then(
+      response => {
+        this.stockList = response.data;
     });
   },
 };

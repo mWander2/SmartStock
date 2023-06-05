@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +16,11 @@ import java.util.List;
 public class JdbcGameDao implements GameDao {
 
     private JdbcTemplate jdbcTemplate;
+    public JdbcGameDao(DataSource dataSource){
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+    private final BigDecimal STARTING_BALANCE = new BigDecimal("100000.00");
+
     private Game mapRowToGame(SqlRowSet rs){
         Game game = new Game();
         game.setGameId(rs.getInt("game_id"));
@@ -22,10 +28,6 @@ public class JdbcGameDao implements GameDao {
         game.setEndDate(rs.getString("end_date"));
         game.setOrganizerName(rs.getString("organizer_name"));
         return game;
-    }
-
-    public JdbcGameDao(DataSource dataSource){
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -60,11 +62,18 @@ public class JdbcGameDao implements GameDao {
         String sql = "INSERT INTO game (game_name, organizer_name, end_date) " +
                 "VALUES (?, ?, ?) " +
                 "RETURNING game_id, game_name, organizer_name, end_date";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
+
         String sql1 = "INSERT INTO user_game (game_id, user_id)" +
                 "VALUES((SELECT game_id FROM game WHERE game_name = ?), " +
                 "(SELECT user_id FROM users WHERE username = ?))";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
         jdbcTemplate.update(sql1, gameName, organizerName);
+
+        String portfolioSql = "INSERT INTO portfolio (game_id, user_id, cash_balance) " +
+                "VALUES ((SELECT game_id FROM game WHERE game_name = ?), " +
+                "(SELECT user_id FROM users WHERE username = ?), ?)";
+        jdbcTemplate.update(portfolioSql, gameName, organizerName, STARTING_BALANCE);
+
         if (result.next()){
             Game game = mapRowToGame(result);
             return game;

@@ -38,7 +38,6 @@ CREATE TABLE portfolio_stocks (
    portfolio_id int NOT NULL,
    ticker varchar(10) NOT NULL,
    quantity int,
-   CONSTRAINT FK_portfolio_stocks_portfolio FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id),
-   CONSTRAINT FK_portfolio_stocks_stock FOREIGN KEY (ticker) REFERENCES stock (ticker)
+   CONSTRAINT FK_portfolio_stocks_portfolio FOREIGN KEY (portfolio_id) REFERENCES portfolio (portfolio_id)
 );
 
