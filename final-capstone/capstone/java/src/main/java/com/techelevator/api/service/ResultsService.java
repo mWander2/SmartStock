@@ -88,10 +88,10 @@ public class ResultsService {
             JsonNode resultsNode = jsonNode.path("results");
             resultsModel.setStatus(statusNode.asText());
 
-            resultsModel.setTicker(tickerNode.asText());
+            resultsModel.setSymbol(tickerNode.asText());
             for(JsonNode result : resultsNode) {
-                resultsModel.setClosePrice(result.path("c").asDouble());
-                resultsModel.setTransactions(result.path("n").asInt());
+                resultsModel.setClose(result.path("c").asDouble());
+                resultsModel.setVolume(result.path("n").asInt());
             }
 
         } catch (JsonProcessingException e) {

@@ -1,4 +1,4 @@
-<template class="test">
+<template>
   <div class="game-card">
     <div class="game-info">
       <h1>{{ game.gameName }}</h1>
@@ -36,7 +36,7 @@
 
 <script>
 import stockService from "../services/StockService.js";
-// import polygonService from "../services/PolygonService.js"
+import polygonService from "../services/PolygonService.js";
 export default {
   data() {
     return {
@@ -50,24 +50,37 @@ export default {
       },
     };
   },
+  
   methods: {
-    buy() { //COST CURRENTLY HARDCODED
-      stockService.buy(this.stock, 500, this.gameId).then(
+    buy() { 
+      polygonService.getResults(this.stock.ticker).then(
         response => {
-          if(response.status == 200) {
-            alert('Your purchase was successful!');
-            this.$router.go();
-          }
+          let price = response.data.close;
+          stockService.buy(this.stock, price, this.gameId).then(
+            response => {
+              if(response.status == 200) {
+                alert('Your purchase was successful!');
+                this.$router.go();
+              }
+            }
+          ).catch(e => {console.log(e.response)});
         }
-      );
+      ).catch(e => {
+        console.log(e.response)
+      })
     },
-    sell(stockPortfolio) { //COST CURRENTLY HARDCODED
-      stockService.sell(500, this.gameId, stockPortfolio.id).then(
+    sell(stockPortfolio) { 
+      polygonService.getResults(stockPortfolio.ticker).then(
         response => {
-          if(response.status == 200) {
-            alert('Your sale was succesful!');
-            this.$router.go();
-          }
+          let price = response.data.close;
+          stockService.sell(price, this.gameId, stockPortfolio.id).then(
+            response => {
+              if(response.status == 200) {
+                alert('Your sale was succesful!');
+                this.$router.go();
+              }
+            }
+          )
         }
       )
     }

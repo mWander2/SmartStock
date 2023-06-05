@@ -86,13 +86,13 @@ public class PortfolioController {
     }
 
     @PostMapping("/stocks/buy/{cost}/{gameId}")
-    public void buy(@RequestBody PortfolioStocks stock, @PathVariable BigDecimal cost, @PathVariable int gameId, Principal principal) {
+    public void buy(@RequestBody PortfolioStocks stock, @PathVariable double cost, @PathVariable int gameId, Principal principal) {
         String username = principal.getName();
         portfolioDao.buy(stock, cost, username, gameId);
     }
 
     @DeleteMapping("/stocks/sell/{cost}/{gameId}/{stockId}")
-    public void sell(@PathVariable BigDecimal cost, @PathVariable int gameId, @PathVariable int stockId, Principal principal) {
+    public void sell(@PathVariable double cost, @PathVariable int gameId, @PathVariable int stockId, Principal principal) {
         String username = principal.getName();
         portfolioDao.sell(cost, username, gameId, stockId);
     }

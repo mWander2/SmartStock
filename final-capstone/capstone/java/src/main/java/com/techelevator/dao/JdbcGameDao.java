@@ -19,7 +19,7 @@ public class JdbcGameDao implements GameDao {
     public JdbcGameDao(DataSource dataSource){
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
-    private final BigDecimal STARTING_BALANCE = new BigDecimal("100000.00");
+    private final double STARTING_BALANCE = 100000.00;
 
     private Game mapRowToGame(SqlRowSet rs){
         Game game = new Game();

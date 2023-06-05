@@ -10,18 +10,18 @@ public class Portfolio {
     private int gameId;
     private int userId;
     private List<StockModel> stocks;
-    private BigDecimal cashBalance;
+    private double cashBalance;
 
     public Portfolio(){
 
     }
-    public Portfolio(int gameId, int userId, List<StockModel> stocks, BigDecimal cashBalance){
+    public Portfolio(int gameId, int userId, List<StockModel> stocks, double cashBalance){
         this.gameId = gameId;
         this.userId = userId;
         this.stocks = stocks;
         this.cashBalance = cashBalance;
     }
-    public Portfolio(int portfolioId,int gameId, int userId, List<StockModel> stocks, BigDecimal cashBalance){
+    public Portfolio(int portfolioId,int gameId, int userId, List<StockModel> stocks, double cashBalance){
         this.portfolioId = portfolioId;
         this.gameId = gameId;
         this.userId = userId;
@@ -61,11 +61,11 @@ public class Portfolio {
         this.stocks = stocks;
     }
 
-    public BigDecimal getCashBalance() {
+    public double getCashBalance() {
         return cashBalance;
     }
 
-    public void setCashBalance(BigDecimal cashBalance) {
+    public void setCashBalance(double cashBalance) {
         this.cashBalance = cashBalance;
     }
 

@@ -40,7 +40,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
         portfolio.setPortfolioId(rs.getInt("portfolio_id"));
         portfolio.setGameId(rs.getInt("game_id"));
         portfolio.setUserId(rs.getInt("user_id"));
-        portfolio.setCashBalance(rs.getBigDecimal("cash_balance"));
+        portfolio.setCashBalance(rs.getDouble("cash_balance"));
 //        portfolio.setStocks(mapStocks(rs));
         return portfolio;
     }
@@ -184,7 +184,6 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
 
 
-
     @Override
     public Portfolio getPortfolioByUser(String username, int gameId) {
         Portfolio portfolio = null;
@@ -196,6 +195,17 @@ public class JdbcPortfolioDao implements PortfolioDao {
             portfolio = mapRowToPortfolio(results);
         }
         return portfolio;
+    }
+
+    @Override
+    public PortfolioStocks getPortfolioStocksById(int id) {
+        PortfolioStocks pS = null;
+        String sql = "SELECT * FROM portfolio_stocks WHERE portfolio_stock_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        if(results.next()) {
+            pS = mapRowToPortfolioStocks(results);
+        }
+        return pS;
     }
 
     @Override
@@ -214,27 +224,31 @@ public class JdbcPortfolioDao implements PortfolioDao {
     }
 
     @Override
-    public void buy(PortfolioStocks stock, BigDecimal cost, String username, int gameId) {
+    public void buy(PortfolioStocks stock, double cost, String username, int gameId) {
         String portfolioStockSql = "INSERT INTO portfolio_stocks (portfolio_id, ticker, quantity) \n" +
                 "VALUES ((SELECT portfolio_id FROM portfolio AS p\n" +
                 "JOIN users AS u ON p.user_id = u.user_id\n" +
                 "WHERE u.username = ? AND p.game_id = ?), ?, ?);";
         jdbcTemplate.update(portfolioStockSql, username, gameId, stock.getTicker(), stock.getQuantity());
 
-        BigDecimal currentBalance = getPortfolioByUser(username, gameId).getCashBalance();
-        BigDecimal newBalance = currentBalance.subtract(cost);
+        double currentBalance = getPortfolioByUser(username, gameId).getCashBalance();
+        cost *= stock.getQuantity();
+        double newBalance = currentBalance - cost;
         String portfolioSql = "UPDATE portfolio SET cash_balance = ?\n" +
                 "WHERE game_id = ? AND user_id = (SELECT user_id FROM users WHERE username = ?)";
         jdbcTemplate.update(portfolioSql, newBalance, gameId, username);
     }
 
     @Override
-    public void sell(BigDecimal cost, String username, int gameId, int stockId) {
+    public void sell(double cost, String username, int gameId, int stockId) {
+        int quantity = getPortfolioStocksById(stockId).getQuantity();
+
         String portfolioStockSql = "DELETE FROM portfolio_stocks WHERE portfolio_stock_id = ?";
         jdbcTemplate.update(portfolioStockSql, stockId);
 
-        BigDecimal currentBalance = getPortfolioByUser(username, gameId).getCashBalance();
-        BigDecimal newBalance = currentBalance.add(cost);
+        double currentBalance = getPortfolioByUser(username, gameId).getCashBalance();
+        cost *= quantity;
+        double newBalance = currentBalance + cost;
         String portfolioSql = "UPDATE portfolio SET cash_balance = ?\n" +
                 "WHERE game_id = ? AND user_id = (SELECT user_id FROM users WHERE username = ?)";
         jdbcTemplate.update(portfolioSql, newBalance, gameId, username);
