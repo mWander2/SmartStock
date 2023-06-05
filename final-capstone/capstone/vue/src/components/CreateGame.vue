@@ -33,15 +33,15 @@
       <form v-on:submit.prevent="createGame">
         <h1>Create Your Game</h1>
         <div class="form-input-group">
-          <label for="name">Game Name</label>
+          <label for="name" id="gamename">Game Name</label>
           <input type="text" id="text" v-model="newGame.gameName" />
         </div>
         <div class="form-input-group">
-          <label for="date">End Date</label>
+          <label for="date" id="end">End Date</label>
           <input type="date" id="date" v-model="newGame.endDate" />
         </div>
         <div>
-          <button type="submit">Create</button>
+          <button type="submit" id="create">Create</button>
         </div>
       </form>
     </div>
@@ -85,15 +85,49 @@ label {
   height: 35vh;
 
   text-align: center;
-  background-color: #9daac8;
-  color: rgb(31, 31, 56);
-  border-radius: 10px;
-  border: 1px solid rgb(31, 31, 56);
+  background-color: #052641;
+  color: white;
+  /* border-radius: 10px; */
+  border: 1px solid black;
+}
+#create{
+  background-color: #052641;
+    font-weight: bold;
+    color: white;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#create:hover{
+  background-color: #06497b;
+}
+
+#end{
+  background-color: #052641;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#gamename{
+  background-color: #052641;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .instructions {
   background: #cff5ea;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   padding: 20px 10px 20px 0px;
   margin-top: -10px;
   margin-bottom: 10px;

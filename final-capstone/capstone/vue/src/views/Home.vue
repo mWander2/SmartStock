@@ -13,12 +13,12 @@
       <div class="link inner-link-container">
         <div class="game-link create-game">
           <router-link v-bind:to="{name: 'create-game'}">
-            <button class="link-btn">Create Game</button>
+            <button class="create">Create Game</button>
           </router-link>
         </div>
         <div class="game-link my-games">
           <router-link v-bind:to="{name: 'my-games'}">
-            <button class="link-btn">My Games</button>
+            <button class="games">My Games</button>
           </router-link>
         </div>
       </div> 
@@ -111,11 +111,11 @@ export default {
   }
 
   .create-game {
-    background-color: transparent;
+    background-color: #052641;
     background-size: cover;
       background-position: center;
     /* margin-right: 5px; */
-    /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\360_F_588749573_CFBDPTgoyr7EB0whIo51COKoGYPTHCbQ.jpg"); */
+    /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\c7fda15d5f26108c27845deb28afa9dc.jpg"); */
     align-items: center;
   }
 
@@ -124,7 +124,7 @@ export default {
     background-size: cover;
     background-position: center;
     margin-left: 5px;
-    background-color: white;
+    background-color: #052641;
     align-items: center;
     border: black 1px;
     border: solid 1px
@@ -154,25 +154,68 @@ export default {
     touch-action: manipulation;
   }
 
-  .link-btn:before {
-    background-color: initial;
-    background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
-    border-radius: 125px;
-    content: "";
-    height: 50%;
-    left: 4%;
-    opacity: .5;
-    position: absolute;
-    top: 0;
-    transition: all .3s;
-    width: 92%;
-  }
-
 .link-btn:hover {
+  box-shadow: #052641 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
+.create{
+  border: 0;
+    border: 1px solid white; 
+    background-color: #052641;
+    border-radius: 0; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    color: white; 
+    cursor: pointer;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    outline: 0;
+    padding: 16px 21px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.games{
+  border: 0;
+    border: 1px solid white; 
+    background-color: #052641;
+    border-radius: 0; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    color: white; 
+    cursor: pointer;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 600;
+    outline: 0;
+    padding: 16px 21px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.create:hover {
   box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
   transform: scale(1.05);
 }
 
+.games:hover {
+  box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+}
 @media (min-width: 768px) {
   .link-btn {
     padding: 16px 48px;
