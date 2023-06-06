@@ -51,7 +51,6 @@
     padding: 5px 10px;
     font-size: 14px;
     text-decoration: none;
-
   }
 
   .home-button:hover, .logout-button:hover {
