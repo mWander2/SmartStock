@@ -53,15 +53,15 @@ public class JdbcGameDao implements GameDao {
 
     @Override
     public Game get(int gameId) {
-      String sql = "SELECT * " +
-              "FROM game g " +
-              "WHERE g.game_id = ?";
-      SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameId);
-      if(result.next()){
-          return mapRowToGame(result);
-      }else {
-          return null;
-      }
+        String sql = "SELECT * " +
+                "FROM game g " +
+                "WHERE g.game_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameId);
+        if(result.next()){
+            return mapRowToGame(result);
+        }else {
+            return null;
+        }
     }
 
     @Override
