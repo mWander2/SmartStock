@@ -8,7 +8,7 @@
     <div class="buy-info">
       <span>Available Funds: ${{portfolio.cashBalance?.toFixed(2)}}</span>
       <form class="buy-form" v-on:submit.prevent="buy">
-        <input type="text" placeholder="AAPL" v-model="stock.ticker"/>
+        <input type="text" placeholder="Symbol" v-model="stock.ticker"/>
         <input type="number" placeholder="Quantity" v-model="stock.quantity"/>
         <button type="submit" class="buy">Buy</button>
       </form>
@@ -24,18 +24,12 @@
         <tr class="row" v-for="stockPortfolio in stockList" v-bind:key="stockPortfolio.id">
           <td>{{stockPortfolio.ticker}}</td>
           <td>{{stockPortfolio.quantity}}</td>
-          <td>$$$$$$</td>
+          <td>${{stockPortfolio.value}}</td>
           <td class="sell-row">
             <button class="sell" v-on:click="sell(stockPortfolio)">Sell</button>
           </td>
         </tr>
       </table>
-    </div>
-    <div class = "player-list">
-      <h3>Players in the Game:</h3>
-      <ul>
-        <li v-for="user in game.users" :key="user.username">{{ user.username }}</li>
-      </ul>
     </div>
     <div class ="add-user">
     <h3>Add Player to Game</h3>
@@ -63,10 +57,12 @@ export default {
       },
       newUser:{
         username: "",
-      }
+      },
     };
   },
-  
+  computed : {
+    
+  },
   methods: {
     buy() { 
       polygonService.getResults(this.stock.ticker).then(
@@ -110,7 +106,7 @@ export default {
       console.error(error);
       alert("Failed to add the user to the game.");
     });
-  }
+    },
   },
   created() {
     stockService.getGame(this.gameId).then(
@@ -126,6 +122,14 @@ export default {
     stockService.getPortfolioStocks(this.gameId).then(
       response => {
         this.stockList = response.data;
+        this.stockList.forEach(s => {
+          polygonService.getResults(s.ticker).then(
+            response => {
+              let price = response.data.close;
+              s.value = price * s.quantity;
+            }
+          )
+        })
     });
   },
 };

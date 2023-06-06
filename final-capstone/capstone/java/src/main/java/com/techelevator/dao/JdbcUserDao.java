@@ -82,6 +82,19 @@ public class JdbcUserDao implements UserDao {
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
     }
 
+    @Override
+    public List<User> getUsersPerGame(int gameId) {
+        List<User> userList = new ArrayList<>();
+        String sql = "SELECT * FROM users AS u " +
+                "JOIN user_game AS ug ON u.user_id = ug.user_id WHERE game_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
+        while(results.next()) {
+            User user = mapRowToUser(results);
+            userList.add(user);
+        }
+        return userList;
+    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
