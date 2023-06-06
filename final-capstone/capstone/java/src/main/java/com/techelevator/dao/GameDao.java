@@ -1,8 +1,11 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Game;
+import com.techelevator.model.Portfolio;
+import com.techelevator.model.User;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +22,14 @@ public interface GameDao {
 
     int delete(int id);
 
+    void endGame(int gameId);
+
+    boolean isGameEnded(int gameId);
+
+    LocalDate getEndDate(int gameId);
+
+    Portfolio getWinner(int gameId);
 
     void addUserToGame(int gameId, String username);
+
 }

@@ -74,5 +74,4 @@ public class Portfolio {
         return "Portfolio{" + "portfolioId=" + portfolioId + ", gameId='" + gameId + '\'' + ", userId='" +
                 userId + '\'' + ", stocks='" + stocks + '\'' + ", cashBalance=" + cashBalance + '}';
     }
-
 }

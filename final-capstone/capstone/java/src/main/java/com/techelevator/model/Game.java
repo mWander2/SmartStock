@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +69,13 @@ public class Game {
 
     public void setUsers(List<String> users) {
         this.users = users;
+    }
+
+    public boolean isGameEnded() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate endDate = LocalDate.parse(this.endDate);
+
+        return currentDate.isAfter(endDate) || currentDate.isEqual(endDate);
     }
 
     @Override

@@ -28,4 +28,14 @@ public interface PortfolioDao {
     List<PortfolioStocks> getPortfolioStocks(String username, int gameId);
     void buy(PortfolioStocks stock, BigDecimal cost, String username, int gameId);
     void sell(BigDecimal cost, String username, int gameId, int stockId);
+
+    void sellAllStocks(int gameId);
+
+    BigDecimal getCashBalanceByGameAndUser(int gameId, int userId);
+
+    void updateCashBalance(int userId, int gameId, BigDecimal cashBalance);
+
+    Portfolio getPortfolioByGameId(int gameId);
+
+    int getPlayerCount(int gameId);
 }
