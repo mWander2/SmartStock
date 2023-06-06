@@ -96,6 +96,22 @@ public class PortfolioController {
         String username = principal.getName();
         portfolioDao.sell(cost, username, gameId, stockId);
     }
+
+    @PostMapping("/endGame")
+    public ResponseEntity<?> endGame() {
+        if (gameService.isGameEnded()) {
+            return ResponseEntity.badRequest().body("Game has already ended");
+        }
+
+        LocalDate currentDate = LocalDate.now();
+        if (currentDate.isBefore(gameService.getEndDate())) {
+            return ResponseEntity.badRequest().body("Game end date has not been reached");
+        }
+
+        gameService.endGame();
+
+        return ResponseEntity.ok("Game ended successfully");
+    }
 }
 
 

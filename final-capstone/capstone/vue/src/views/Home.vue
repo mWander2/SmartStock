@@ -59,7 +59,8 @@ export default {
     /* border-radius: 10px; */
     margin-bottom: 5px;
     margin-top: -15px;
-    border: solid 1px #052641
+    border: solid 1px #052641;
+   
   }
 
   h1 {

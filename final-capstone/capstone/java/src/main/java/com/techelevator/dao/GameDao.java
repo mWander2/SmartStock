@@ -18,4 +18,5 @@ public interface GameDao {
     String getUsername (Principal principal);
 
     int delete(int id);
+
 }

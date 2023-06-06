@@ -1,6 +1,8 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Game;
+import com.techelevator.model.Portfolio;
+import com.techelevator.model.PortfolioStocks;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -16,7 +18,8 @@ import java.util.List;
 public class JdbcGameDao implements GameDao {
 
     private JdbcTemplate jdbcTemplate;
-    public JdbcGameDao(DataSource dataSource){
+
+    public JdbcGameDao(DataSource dataSource, PortfolioDao portfolioDao, UserDao userDao) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     private final BigDecimal STARTING_BALANCE = new BigDecimal("100000.00");
@@ -137,4 +140,5 @@ public class JdbcGameDao implements GameDao {
 
         return numRowsDeleted;
     }
+
 }
