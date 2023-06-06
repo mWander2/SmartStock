@@ -1,21 +1,15 @@
 package com.techelevator.dao;
 
-import com.techelevator.api.model.StockModel;
 import com.techelevator.model.Portfolio;
 import com.techelevator.model.PortfolioStocks;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class JdbcPortfolioDao implements PortfolioDao {
@@ -252,6 +246,42 @@ public class JdbcPortfolioDao implements PortfolioDao {
         String portfolioSql = "UPDATE portfolio SET cash_balance = ?\n" +
                 "WHERE game_id = ? AND user_id = (SELECT user_id FROM users WHERE username = ?)";
         jdbcTemplate.update(portfolioSql, newBalance, gameId, username);
+    }
+
+    @Override
+    public void sellAllStocks(int gameId) {
+        String sql = "DELETE FROM portfolio_stocks WHERE portfolio_id IN " +
+                "(SELECT portfolio_id FROM portfolio WHERE game_id = ?)";
+        jdbcTemplate.update(sql, gameId);
+    }
+
+    @Override
+    public BigDecimal getCashBalanceByGameAndUser(int gameId, int userId) {
+        String sql = "SELECT cash_balance FROM portfolio WHERE game_id = ? AND user_id = ?";
+        return jdbcTemplate.queryForObject(sql, BigDecimal.class, gameId, userId);
+    }
+
+    @Override
+    public void updateCashBalance(int userId, int gameId, BigDecimal cashBalance) {
+        String sql = "UPDATE portfolio SET cash_balance = ? " +
+                "WHERE user_id = ? AND game_id = ?";
+        jdbcTemplate.update(sql, cashBalance, userId, gameId);
+    }
+
+    @Override
+    public Portfolio getPortfolioByGameId(int gameId) {
+        String sql = "SELECT * FROM portfolio WHERE game_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameId);
+        if (result.next()) {
+            return mapRowToPortfolio(result);
+        } else {
+            return null;
+        }
+    }
+    @Override
+    public int getPlayerCount(int gameId) {
+        String sql = "SELECT COUNT(DISTINCT user_id) FROM portfolio WHERE game_id = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, gameId);
     }
 
     PortfolioStocks mapRowToPortfolioStocks(SqlRowSet rowSet) {

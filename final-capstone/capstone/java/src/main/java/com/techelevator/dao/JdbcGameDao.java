@@ -2,26 +2,28 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Game;
 import com.techelevator.model.Portfolio;
-import com.techelevator.model.PortfolioStocks;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Component
 public class JdbcGameDao implements GameDao {
 
     private JdbcTemplate jdbcTemplate;
+    private PortfolioDao portfolioDao;
 
-    public JdbcGameDao(DataSource dataSource, PortfolioDao portfolioDao, UserDao userDao) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcGameDao(JdbcTemplate jdbcTemplate, PortfolioDao portfolioDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.portfolioDao = portfolioDao;
     }
+
+
     private final BigDecimal STARTING_BALANCE = new BigDecimal("100000.00");
 
     private Game mapRowToGame(SqlRowSet rs){
@@ -106,10 +108,6 @@ public class JdbcGameDao implements GameDao {
         return null;
     }
 
-
-
-
-
     public String getUsername(Principal principal){
         return principal.getName();
     }
@@ -122,7 +120,7 @@ public class JdbcGameDao implements GameDao {
         String sql = "SELECT * " +
                 "FROM game g " +
                 "JOIN user_game ON g.game_id = user_game.game_id " +
-                "JOIN users ON users.user_id = user_game.user_id" +
+                "JOIN users ON users.user_id = user_game.user_id " + // Add a space here
                 "WHERE username = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()){
@@ -130,9 +128,6 @@ public class JdbcGameDao implements GameDao {
             games.add(game);
         }
         return games;
-
-
-
     }
 
     @Override
@@ -147,4 +142,73 @@ public class JdbcGameDao implements GameDao {
         return numRowsDeleted;
     }
 
+    @Override
+    public void endGame(int gameId) {
+        // Sell all outstanding stock balances for all players in the game
+        portfolioDao.sellAllStocks(gameId);
+
+        // Update the game end date to the current date
+        String sql = "UPDATE game SET end_date = ? WHERE game_id = ?";
+        LocalDate currentDate = LocalDate.now();
+        jdbcTemplate.update(sql, currentDate.toString(), gameId);
+    }
+
+    @Override
+    public boolean isGameEnded(int gameId) {
+        String sql = "SELECT end_date FROM game WHERE game_id = ?";
+        String endDateStr = jdbcTemplate.queryForObject(sql, String.class, gameId);
+        LocalDate endDate = LocalDate.parse(endDateStr);
+
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.isAfter(endDate) || currentDate.isEqual(endDate);
+    }
+
+    @Override
+    public LocalDate getEndDate(int gameId) {
+        String sql = "SELECT end_date FROM game WHERE game_id = ?";
+        String endDateStr = jdbcTemplate.queryForObject(sql, String.class, gameId);
+        return LocalDate.parse(endDateStr);
+    }
+
+
+    @Override
+    public Portfolio getWinner(int gameId) {
+
+        // Check the number of players in the game
+        int playerCount = portfolioDao.getPlayerCount(gameId);
+        if (playerCount == 1) {
+            // Only one player, directly retrieve the portfolio by game ID
+            return portfolioDao.getPortfolioByGameId(gameId);
+        } else {
+            // Multiple players, execute the query to find the winner
+            String sql = "SELECT p.user_id, p.cash_balance " +
+                    "FROM portfolio p " +
+                    "WHERE p.game_id = ? " +
+                    "ORDER BY p.cash_balance DESC " +
+                    "LIMIT 1";
+
+            // Execute the query and retrieve the result
+            SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameId);
+
+            if (result.next()) {
+                // Retrieve the winner's user ID and cash balance
+                int userId = result.getInt("user_id");
+                BigDecimal cashBalance = result.getBigDecimal("cash_balance");
+
+                // Create Portfolio object for the winner
+                Portfolio winner = new Portfolio();
+                winner.setUserId(userId);
+                winner.setGameId(gameId);
+                winner.setCashBalance(cashBalance);
+
+                // Update cash balance for the winner
+                portfolioDao.updateCashBalance(userId, gameId, cashBalance);
+
+                return winner;
+            } else {
+                // No winner found
+                return null;
+            }
+        }
+    }
 }
