@@ -28,6 +28,9 @@ export default {
 
     sell(cost, gameId, stockId) {
         return axios.delete(`portfolios/stocks/sell/${cost}/${gameId}/${stockId}`)
+    },
+    addUserToGame(gameId, username){
+        const data = { username };
+        return axios.post(`/games/${gameId}/users`, data);
     }
-    
 }

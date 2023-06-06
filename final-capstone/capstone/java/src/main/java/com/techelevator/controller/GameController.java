@@ -4,13 +4,17 @@ package com.techelevator.controller;
 import com.techelevator.dao.GameDao;
 import com.techelevator.model.Game;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -86,5 +90,27 @@ public class GameController {
     public void delete(@PathVariable int id){
         gameDao.delete(id);
     }
+
+
+    @PostMapping("/games/{gameId}/users")
+    public ResponseEntity<String> addUserToGame(@PathVariable int gameId, @RequestBody Map<String, String> requestPayload) {
+        String username = requestPayload.get("username");
+
+        Game game = gameDao.get(gameId);
+        if (game == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game Not Found");
+        }
+
+        game.addUser(username);
+
+        gameDao.update(game, gameId);
+
+        return ResponseEntity.ok("User added to the game successfully.");
+    }
+
+
+
+
+
 
 }
