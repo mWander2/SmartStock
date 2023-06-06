@@ -96,7 +96,7 @@ public class GameController {
         gameDao.delete(id);
     }
 
-    @PostMapping("/games/{gameId}/users")
+    @PostMapping("/{gameId}/users")
     public ResponseEntity<String> addUserToGame(@PathVariable int gameId, @RequestBody Map<String, String> requestPayload) {
         String username = requestPayload.get("username");
 
@@ -105,12 +105,11 @@ public class GameController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game Not Found");
         }
 
-        game.addUser(username);
-
-        gameDao.update(game, gameId);
+        gameDao.addUserToGame(gameId, username);
 
         return ResponseEntity.ok("User added to the game successfully.");
     }
+
 
     @PostMapping("/{id}/end")
     public ResponseEntity<?> endGame(@PathVariable int id) {
