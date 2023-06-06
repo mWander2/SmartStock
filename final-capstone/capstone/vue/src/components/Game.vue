@@ -102,7 +102,6 @@ export default {
     },
     addUser(){
     stockService.addUserToGame(this.gameId, this.newUser.username).then((response) => {
-<<<<<<< HEAD
       if(response.status === 200){
         alert("User added to the game successfully.");
         this.newUser.username = "";
@@ -111,17 +110,6 @@ export default {
       console.error(error);
       alert("Failed to add the user to the game.");
     });
-=======
-        if(response.status === 200){
-            alert("User added to the game successfully.");
-            this.newUser.username = "";
-        }
-    }).catch((error) => {
-        console.error(error);
-        alert("Failed to add the user to the game.");
-    });
-
->>>>>>> main
   }
   },
   created() {
@@ -140,11 +128,6 @@ export default {
         this.stockList = response.data;
     });
   },
-<<<<<<< HEAD
-  
-=======
- 
->>>>>>> main
 };
 </script>
 
