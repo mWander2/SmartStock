@@ -1,7 +1,9 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Game {
     private int gameId;
@@ -10,6 +12,7 @@ public class Game {
     private String organizerName;
     @NotBlank(message="The field `endDate` should not be blank.")
     private String endDate;
+    private List<String> users;
 
     public Game() {
     }
@@ -59,11 +62,28 @@ public class Game {
         this.endDate = endDate;
     }
 
+    public List<String> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<String> users) {
+        this.users = users;
+    }
+
     @Override
     public String toString() {
         return "Game{" + "gameId=" + gameId + ", gameName='" + gameName + '\''
                 + ", organizerName='" + organizerName + '\'' + ", endDate=" + endDate + '}';
     }
+    public void addUser(String username) {
+        if (users == null) {
+            users = new ArrayList<>();
+        }
+        users.add(username);
+    }
+
+
+
 }
 
 

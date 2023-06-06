@@ -64,42 +64,48 @@ public class JdbcGameDao implements GameDao {
                 "RETURNING game_id, game_name, organizer_name, end_date";
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, gameName, organizerName, endDate);
 
-        String sql1 = "INSERT INTO user_game (game_id, user_id)" +
-                "VALUES((SELECT game_id FROM game WHERE game_name = ?), " +
-                "(SELECT user_id FROM users WHERE username = ?))";
-        jdbcTemplate.update(sql1, gameName, organizerName);
-
-        String portfolioSql = "INSERT INTO portfolio (game_id, user_id, cash_balance) " +
-                "VALUES ((SELECT game_id FROM game WHERE game_name = ?), " +
-                "(SELECT user_id FROM users WHERE username = ?), ?)";
-        jdbcTemplate.update(portfolioSql, gameName, organizerName, STARTING_BALANCE);
-
-        if (result.next()){
+        if (result.next()) {
             Game game = mapRowToGame(result);
+            int gameId = game.getGameId();
+
+            String userGameSql = "INSERT INTO user_game (game_id, user_id) " +
+                    "VALUES (?, (SELECT user_id FROM users WHERE username = ?))";
+            jdbcTemplate.update(userGameSql, gameId, organizerName);
+
+            String portfolioSql = "INSERT INTO portfolio (game_id, user_id, cash_balance) " +
+                    "VALUES (?, (SELECT user_id FROM users WHERE username = ?), ?)";
+            jdbcTemplate.update(portfolioSql, gameId, organizerName, STARTING_BALANCE);
+
             return game;
-        }else{
+        } else {
             return null;
         }
-
     }
+
 
     @Override
     public Game update(Game game, int gameId) {
-        Game updatedGame = null;
-    String sql = "UPDATE game " +
-            "SET game_name = ?, organizer_name = ?, end_date = ? " +
-            "WHERE game_id = ?";
+        String sql = "UPDATE game " +
+                "SET game_name = ?, organizer_name = ?, end_date = ? " +
+                "WHERE game_id = ?";
 
-       int rowsAffected =  jdbcTemplate.update(sql, game.getGameName(),
+        int rowsAffected = jdbcTemplate.update(sql, game.getGameName(),
                 game.getOrganizerName(), game.getEndDate(), gameId);
-        updatedGame = get(game.getGameId());
-        if(rowsAffected > 0) {
-            return updatedGame;
+
+        if (rowsAffected > 0) {
+            Game updatedGame = get(gameId);
+            if (updatedGame != null) {
+                updatedGame.setUsers(game.getUsers());
+                return updatedGame;
+            }
         }
-        else{
-            return null;
-        }
+
+        return null;
     }
+
+
+
+
 
     public String getUsername(Principal principal){
         return principal.getName();

@@ -31,6 +31,19 @@
         </tr>
       </table>
     </div>
+    <div class = "player-list">
+      <h3>Players in the Game:</h3>
+      <ul>
+        <li v-for="user in game.users" :key="user.username">{{ user.username }}</li>
+      </ul>
+    </div>
+    <div class ="add-user">
+    <h3>Add Player to Game</h3>
+    <form v-on:submit.prevent="addUser">
+      <input type="text" placeholder = "Username" v-model="newUser.username" />
+    <button type = "submit">Add User</button>
+    </form>
+  </div>
   </div>
 </template>
 
@@ -48,6 +61,9 @@ export default {
         ticker : "",
         quantity : "",
       },
+      newUser:{
+        username: "",
+      }
     };
   },
   
@@ -101,6 +117,17 @@ export default {
         this.stockList = response.data;
     });
   },
+  addUser(){
+    stockService.addUserToGame(this.gameId, this.newUser.username).then((response) => {
+      if(response.status === 200){
+        alert("User added to the game successfully.");
+        this.newUser.username = "";
+      }
+    }).catch((error) => {
+      console.error(error);
+      alert("Failed to add the user to the game.");
+    })
+  }
 };
 </script>
 
