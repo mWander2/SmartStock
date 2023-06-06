@@ -16,9 +16,9 @@
     <div class="portfolio-container">
       <table class="portfolio">
         <tr class="head">
-          <th>Ticker</th>
-          <th>Quantity</th>
-          <th>Value</th>
+          <th>Ticker:</th>
+          <th>Quantity:</th>
+          <th>Value:</th>
           <th></th>
         </tr>
         <tr class="row" v-for="stockPortfolio in stockList" v-bind:key="stockPortfolio.id">
@@ -102,6 +102,7 @@ export default {
     },
     addUser(){
     stockService.addUserToGame(this.gameId, this.newUser.username).then((response) => {
+<<<<<<< HEAD
       if(response.status === 200){
         alert("User added to the game successfully.");
         this.newUser.username = "";
@@ -110,6 +111,17 @@ export default {
       console.error(error);
       alert("Failed to add the user to the game.");
     });
+=======
+        if(response.status === 200){
+            alert("User added to the game successfully.");
+            this.newUser.username = "";
+        }
+    }).catch((error) => {
+        console.error(error);
+        alert("Failed to add the user to the game.");
+    });
+
+>>>>>>> main
   }
   },
   created() {
@@ -128,15 +140,21 @@ export default {
         this.stockList = response.data;
     });
   },
+<<<<<<< HEAD
   
+=======
+ 
+>>>>>>> main
 };
 </script>
 
 <style scope>
+
+ *, html {
+    font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  }
 .game-card {
   background: #9daac8;
-  border-radius: 5px;
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -157,6 +175,14 @@ export default {
 .buy,
 .sell {
   border-radius: 5px;
+  background-color: #052641;
+    font-weight: bold;
+    color: white;
+    border: solid 1px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .buy-info {
@@ -182,6 +208,7 @@ export default {
   border-spacing: 0;
   width: 98%;
   display: table;
+  color: #052641
 }
 
 .portfolio tr:nth-child(odd) {

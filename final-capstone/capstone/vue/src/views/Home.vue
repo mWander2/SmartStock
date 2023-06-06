@@ -127,7 +127,6 @@ export default {
     /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\c7fda15d5f26108c27845deb28afa9dc.jpg"); */
     align-items: center;
     margin-bottom: -25px;
-    
     height: 12vh
   }
 

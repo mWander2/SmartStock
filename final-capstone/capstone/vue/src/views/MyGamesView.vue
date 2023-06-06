@@ -18,7 +18,7 @@
             <td>{{game.gameName}}</td>
             <td>{{game.endDate}}</td>
             <td class="right">
-                <router-link v-bind:to="{ name: 'view-game', params: { id: game.gameId } }">
+                <router-link v-bind:to="{ name: 'view-game', params: { id: game.gameId } }" id="view-game">
                     View Game
                 </router-link>
             </td>
@@ -48,6 +48,9 @@ export default {
 
 <style scope>
 
+*, html {
+    font-family: system-ui,-apple-system,system-ui,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
+  }
 .games {
    flex-grow: 1;
    color:  rgb(31, 31, 56);
@@ -55,10 +58,12 @@ export default {
 
 .game-table tr:nth-child(odd) {
     background-color: #fff;
+     border: 1px solid 
 }
 
 .game-table tr:nth-child(even) {
     background-color: #f1f1f1;
+     border: 1px solid 
 }
 
 .game-table tr {
@@ -90,4 +95,21 @@ export default {
     width: 100%;
     display: table;
 }
+
+#view-game{
+  background-color: #052641;
+    font-weight: bold;
+    color: white;
+    
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 5px;
+    
+}
+#view-game:hover{
+box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+  }
 </style>
