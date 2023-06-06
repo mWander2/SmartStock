@@ -96,7 +96,6 @@ public class GameController {
         gameDao.delete(id);
     }
 
-
     @PostMapping("/games/{gameId}/users")
     public ResponseEntity<String> addUserToGame(@PathVariable int gameId, @RequestBody Map<String, String> requestPayload) {
         String username = requestPayload.get("username");
@@ -144,15 +143,14 @@ public class GameController {
         // Verify the existence of the game
         Game game = gameDao.get(gameId);
         if (game == null) {
-            return ResponseEntity.notFound().build(); // Game not found
+            return ResponseEntity.notFound().header("message", "Game not found").build();
         }
 
         Portfolio winner = gameDao.getWinner(gameId);
         if (winner != null) {
             return ResponseEntity.ok(winner);
         } else {
-            return ResponseEntity.notFound().build(); // No winner found
+            return ResponseEntity.notFound().header("message", "No winner found").build();
         }
     }
-
 }

@@ -29,4 +29,7 @@ public interface GameDao {
     LocalDate getEndDate(int gameId);
 
     Portfolio getWinner(int gameId);
+
+    void addUserToGame(int gameId, String username);
+
 }

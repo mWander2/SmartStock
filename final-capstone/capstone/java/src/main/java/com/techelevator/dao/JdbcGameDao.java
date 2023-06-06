@@ -2,9 +2,11 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Game;
 import com.techelevator.model.Portfolio;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -121,6 +123,9 @@ public class JdbcGameDao implements GameDao {
                 "FROM game g " +
                 "JOIN user_game ON g.game_id = user_game.game_id " +
                 "JOIN users ON users.user_id = user_game.user_id " + // Add a space here
+
+                "JOIN users ON users.user_id = user_game.user_id " +
+
                 "WHERE username = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()){
@@ -211,4 +216,40 @@ public class JdbcGameDao implements GameDao {
             }
         }
     }
+
+
+    // code below edit ddove
+    @Override
+    public void addUserToGame(int gameId, String username) {
+        String userExistSql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        String gameExistSql = "SELECT COUNT(*) FROM game WHERE game_id = ?";
+        String userGameExistSql = "SELECT COUNT(*) FROM user_game WHERE game_id = ? AND user_id = (SELECT user_id FROM users WHERE username = ?)";
+
+        // Check if the user exists
+        Integer userCount = jdbcTemplate.queryForObject(userExistSql, new Object[]{username}, Integer.class);
+        if(userCount == null || userCount <= 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+
+        // Check if the game exists
+        Integer gameCount = jdbcTemplate.queryForObject(gameExistSql, new Object[]{gameId}, Integer.class);
+        if(gameCount == null || gameCount <= 0){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game not found");
+        }
+
+        // Check if the user is already added to the game
+        Integer userGameCount = jdbcTemplate.queryForObject(userGameExistSql, new Object[]{gameId, username}, Integer.class);
+        if(userGameCount != null && userGameCount > 0){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "User already added to the game");
+        }
+
+        String sql = "INSERT INTO user_game (game_id, user_id) " +
+                "VALUES (?, (SELECT user_id FROM users WHERE username = ?))";
+        jdbcTemplate.update(sql, gameId, username);
+
+        String portfolioSql = "INSERT INTO portfolio (game_id, user_id, cash_balance) " +
+                "VALUES (?, (SELECT user_id FROM users WHERE username = ?), ?)";
+        jdbcTemplate.update(portfolioSql, gameId, username, STARTING_BALANCE);
+    }
+
 }
