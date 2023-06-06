@@ -246,10 +246,11 @@ public class JdbcGameDao implements GameDao {
         String sql = "INSERT INTO user_game (game_id, user_id) " +
                 "VALUES (?, (SELECT user_id FROM users WHERE username = ?))";
         jdbcTemplate.update(sql, gameId, username);
-
+        System.out.println("5");
         String portfolioSql = "INSERT INTO portfolio (game_id, user_id, cash_balance) " +
                 "VALUES (?, (SELECT user_id FROM users WHERE username = ?), ?)";
         jdbcTemplate.update(portfolioSql, gameId, username, STARTING_BALANCE);
+
     }
 
 }
