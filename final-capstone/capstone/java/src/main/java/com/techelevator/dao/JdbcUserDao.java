@@ -32,7 +32,6 @@ public class JdbcUserDao implements UserDao {
         } catch (EmptyResultDataAccessException e) {
             throw new UsernameNotFoundException("User " + username + " was not found.");
         }
-
         return userId;
     }
 
@@ -57,7 +56,6 @@ public class JdbcUserDao implements UserDao {
             User user = mapRowToUser(results);
             users.add(user);
         }
-
         return users;
     }
 

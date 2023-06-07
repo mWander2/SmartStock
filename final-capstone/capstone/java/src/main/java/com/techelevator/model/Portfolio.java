@@ -69,9 +69,4 @@ public class Portfolio {
         this.cashBalance = cashBalance;
     }
 
-    @Override
-    public String toString(){
-        return "Portfolio{" + "portfolioId=" + portfolioId + ", gameId='" + gameId + '\'' + ", userId='" +
-                userId + '\'' + ", stocks='" + stocks + '\'' + ", cashBalance=" + cashBalance + '}';
-    }
 }

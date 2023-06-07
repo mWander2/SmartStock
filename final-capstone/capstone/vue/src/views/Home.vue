@@ -104,7 +104,7 @@ export default {
   .inner-link-container {
     display: flex;
     /* background-image: linear-gradient(rgb(31, 31, 56), #cff5ea); */
-
+    flex-basis: 45%;
     height: 15vh;
     justify-content: space-around;
   }
@@ -127,7 +127,8 @@ export default {
     /* background-image: url("C:\Users\Student\workspace\virtual-stock-final-capstone\final-capstone\capstone\vue\public\img\c7fda15d5f26108c27845deb28afa9dc.jpg"); */
     align-items: center;
     margin-bottom: -25px;
-    height: 12vh
+    height: 93%;
+
   }
 
   .my-games {
@@ -140,7 +141,7 @@ export default {
     border: black 1px;
     border: solid 1px;
     margin-bottom: -25px;
-    height: 12vh;
+    height: 93%;
   }
 
   .link-btn {

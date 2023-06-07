@@ -34,7 +34,6 @@ public class GameController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-//    @PreAuthorize()
     public List<Game> getAllGames(){
         return gameDao.list();
     }
@@ -44,20 +43,12 @@ public class GameController {
         List<Game> myGames = gameDao.searchByUsername(principal.getName());
         if(myGames == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        else{
+        } else {
             return myGames;
         }
     }
 
-    @RequestMapping(path = "/get", method = RequestMethod.GET)
-    public String getUsername(Principal principal){
-        return gameDao.getUsername(principal);
-    }
-
-
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-//    @PreAuthorize()
     public Game get(@PathVariable int id){
         Game game = gameDao.get(id);
         if (game == null){
@@ -69,31 +60,11 @@ public class GameController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/new", method = RequestMethod.POST)
-//    @PreAuthorize()
     public Game create(@Valid @RequestBody Game game, Principal principal){
         String gameName = game.getGameName();
         String organizerName = principal.getName();
         String endDate = game.getEndDate();
         return gameDao.create(gameName, organizerName, endDate);
-    }
-
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-//    @PreAuthorize()
-    public Game update(@Valid @RequestBody Game game, @PathVariable int id){
-        Game updatedGame = gameDao.update(game, id);
-        if(updatedGame == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game Not Found");
-        } else {
-            return updatedGame;
-        }
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @PreAuthorize()
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable int id){
-        gameDao.delete(id);
     }
 
     @PostMapping("/{gameId}/users")
@@ -104,7 +75,6 @@ public class GameController {
         if (game == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game Not Found");
         }
-
         gameDao.addUserToGame(gameId, username);
 
         return ResponseEntity.ok("User added to the game successfully.");
@@ -117,17 +87,14 @@ public class GameController {
         if (game == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Game Not Found");
         }
-
         if (gameDao.isGameEnded(id)) {
             return ResponseEntity.badRequest().body("Game has already ended");
         }
-
         LocalDate currentDate = LocalDate.now();
         LocalDate endDate = gameDao.getEndDate(id);
         if (currentDate.isBefore(endDate)) {
             return ResponseEntity.badRequest().body("Game end date has not been reached");
         }
-
         // Sell all outstanding stock balances for all players in the game
         portfolioDao.sellAllStocks(id);
 
@@ -144,7 +111,6 @@ public class GameController {
         if (game == null) {
             return ResponseEntity.notFound().header("message", "Game not found").build();
         }
-
         Portfolio winner = gameDao.getWinner(gameId);
         if (winner != null) {
             return ResponseEntity.ok(winner);

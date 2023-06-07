@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,44 +30,44 @@ public class ResultsService {
     @Autowired
     private ApiStockService stockService;
 
-//    public List<ResultsModel> getSearchResults(String ticker) {
-//
-//        String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.set("Authorization", "Bearer " + apiKey);
-//
-//        HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
-//        RestTemplate restTemplate = new RestTemplate();
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
-//        JsonNode jsonNode;
-//        List<ResultsModel> resultsList = new ArrayList<>();
-//
-//        try {
-//            jsonNode = objectMapper.readTree(response.getBody());
-//            JsonNode statusNode = jsonNode.path("status");
-//            JsonNode tickerNode = jsonNode.path("ticker");
-//            JsonNode resultsNode = jsonNode.path("results");
-//
-//            String status = statusNode.asText();
-//            String resultTicker = tickerNode.asText();
-//
-//            for (JsonNode resultNode : resultsNode) {
-//                double closePrice = resultNode.path("c").asDouble();
-//                int transactions = resultNode.path("n").asInt();
-//
-//                ResultsModel resultsModel = new ResultsModel(closePrice, transactions, status, resultTicker);
-//                resultsList.add(resultsModel);
-//            }
-//
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return resultsList;
-//    }
+    public List<ResultsModel> getSearchResults(String ticker) {
+
+        String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + apiKey);
+
+        HttpEntity<String> httpEntity = new HttpEntity<>("", headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
+        JsonNode jsonNode;
+        List<ResultsModel> resultsList = new ArrayList<>();
+
+        try {
+            jsonNode = objectMapper.readTree(response.getBody());
+            JsonNode statusNode = jsonNode.path("status");
+            JsonNode tickerNode = jsonNode.path("ticker");
+            JsonNode resultsNode = jsonNode.path("results");
+
+            String status = statusNode.asText();
+            String resultTicker = tickerNode.asText();
+
+            for (JsonNode resultNode : resultsNode) {
+                BigDecimal closePrice = resultNode.path("c").decimalValue();
+                int transactions = resultNode.path("n").asInt();
+
+                ResultsModel resultsModel = new ResultsModel(closePrice, transactions, status, resultTicker);
+                resultsList.add(resultsModel);
+            }
+
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return resultsList;
+    }
 
     public ResultsModel getResultObject(String ticker) {
         String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;

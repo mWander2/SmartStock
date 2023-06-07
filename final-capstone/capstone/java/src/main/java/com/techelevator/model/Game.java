@@ -78,11 +78,6 @@ public class Game {
         return currentDate.isAfter(endDate) || currentDate.isEqual(endDate);
     }
 
-    @Override
-    public String toString() {
-        return "Game{" + "gameId=" + gameId + ", gameName='" + gameName + '\''
-                + ", organizerName='" + organizerName + '\'' + ", endDate=" + endDate + '}';
-    }
     public void addUser(String username) {
         if (users == null) {
             users = new ArrayList<>();

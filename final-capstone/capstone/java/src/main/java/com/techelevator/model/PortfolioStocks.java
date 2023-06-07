@@ -44,7 +44,6 @@ public class PortfolioStocks {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
     public BigDecimal getValue() {
         return value;
     }

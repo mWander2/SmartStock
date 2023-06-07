@@ -106,7 +106,6 @@ public class JdbcGameDao implements GameDao {
                 return updatedGame;
             }
         }
-
         return null;
     }
 
@@ -123,8 +122,7 @@ public class JdbcGameDao implements GameDao {
                 "FROM game g " +
                 "JOIN user_game ON g.game_id = user_game.game_id " +
                 "JOIN users ON users.user_id = user_game.user_id " + // Add a space here
-                "WHERE username = ? " +
-                "ORDER BY users.user_id";
+                "WHERE username = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()){
             Game game = mapRowToGame(results);
