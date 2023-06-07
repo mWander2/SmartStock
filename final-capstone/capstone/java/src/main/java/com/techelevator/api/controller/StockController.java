@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @CrossOrigin
@@ -27,9 +28,16 @@ public class StockController {
         if (resultsModel == null) {
             return ResponseEntity.notFound().build();
         }
+
+        if (resultsModel != null) {
+            BigDecimal value = resultsModel.calculateValue();
+            resultsModel.setValue(value);
+        }
+
         return ResponseEntity.ok(resultsModel);
     }
 }
 
 // postman url: http://localhost:9000/stock?ticker={ticker}
+
 

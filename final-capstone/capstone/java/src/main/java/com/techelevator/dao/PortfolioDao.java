@@ -1,6 +1,5 @@
 package com.techelevator.dao;
 
-import com.techelevator.api.model.StockModel;
 import com.techelevator.model.Portfolio;
 import com.techelevator.model.PortfolioStocks;
 

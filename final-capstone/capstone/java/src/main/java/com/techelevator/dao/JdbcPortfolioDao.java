@@ -19,16 +19,6 @@ public class JdbcPortfolioDao implements PortfolioDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-//    private List<StockModel> mapStocks(SqlRowSet rs) {
-//        List<StockModel> stocks = new ArrayList<>();
-//        while(rs.next()){
-//            StockModel stock = new StockModel();
-//            stock.setTicker(rs.getString("ticker"));
-//            stocks.add(stock);
-//        }
-//        return stocks;
-//    }
-
     private Portfolio mapRowToPortfolio(SqlRowSet rs){
         Portfolio portfolio = new Portfolio();
         portfolio.setPortfolioId(rs.getInt("portfolio_id"));
@@ -38,7 +28,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
 //        portfolio.setStocks(mapStocks(rs));
         return portfolio;
     }
-
+    
 
 //    @Override
 //    public List<Portfolio> getAllPortfolios() {
@@ -178,6 +168,7 @@ public class JdbcPortfolioDao implements PortfolioDao {
 
 
 
+
     @Override
     public Portfolio getPortfolioByUser(String username, int gameId) {
         Portfolio portfolio = null;
@@ -290,6 +281,8 @@ public class JdbcPortfolioDao implements PortfolioDao {
         stock.setPortfolioId(rowSet.getInt("portfolio_id"));
         stock.setTicker(rowSet.getString("ticker"));
         stock.setQuantity(rowSet.getInt("quantity"));
+        stock.setValue(rowSet.getBigDecimal("value"));
         return stock;
     }
+
 }

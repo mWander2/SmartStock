@@ -41,5 +41,5 @@ export default {
     addUserToGame(gameId, username){
         const data = { username:username };
         return axios.post(`/games/${gameId}/users`, data);
-    }
+    },
 }
