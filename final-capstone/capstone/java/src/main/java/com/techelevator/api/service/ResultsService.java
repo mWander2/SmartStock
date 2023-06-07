@@ -22,9 +22,6 @@ public class ResultsService {
     @Value("${polygon.api.key}")
     private String apiKey;
 
-    @Autowired
-    private ApiStockService stockService;
-
     public ResultsModel getResultObject(String ticker) {
         String url = apiUrl + "/aggs/ticker/" + ticker + "/prev?adjusted=false&apiKey=" + apiKey;
 

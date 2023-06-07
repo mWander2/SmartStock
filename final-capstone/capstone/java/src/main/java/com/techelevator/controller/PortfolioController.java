@@ -51,5 +51,5 @@ public class PortfolioController {
         String username = principal.getName();
         portfolioDao.sell(cost, username, gameId, stockId);
     }
-    
+
 }

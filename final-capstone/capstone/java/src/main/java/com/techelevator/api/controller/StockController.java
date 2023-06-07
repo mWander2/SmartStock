@@ -40,3 +40,4 @@ public class StockController {
 
 // postman url: http://localhost:9000/stock?ticker={ticker}
 
+

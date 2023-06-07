@@ -51,6 +51,7 @@ public class ResultsModel {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
+        this.value = calculateValue();
     }
 
     public BigDecimal getValue() {
