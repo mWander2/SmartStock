@@ -38,9 +38,9 @@ export default {
     };
   },
   created() {
-    stockService.getAllGames().then((response) => {
-      const games = response.data;
-      this.gamesList = games.filter(g => g.organizerName === this.user);
+    stockService.getGamesByUser().then(
+      response => {
+        this.gamesList = response.data;
     });
   },
 };

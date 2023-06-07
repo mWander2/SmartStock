@@ -39,7 +39,7 @@ public class GameController {
         return gameDao.list();
     }
 
-    @RequestMapping(path = "/username", method = RequestMethod.GET)
+    @RequestMapping(path = "/user", method = RequestMethod.GET)
     public List<Game> showMyGames(Principal principal){
         List<Game> myGames = gameDao.searchByUsername(principal.getName());
         if(myGames == null){

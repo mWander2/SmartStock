@@ -28,6 +28,11 @@ public class PortfolioController {
         this.portfolioDao = portfolioDao;
     }
 
+    @GetMapping("/all/{gameId}")
+    public List<Portfolio> getPortfoliosByGameId(@PathVariable int gameId) {
+        return portfolioDao.getPortfoliosByGameId(gameId);
+    }
+
     @GetMapping("/{gameId}")
     public Portfolio getPortfolioByUser(Principal principal, @PathVariable int gameId) {
         String username = principal.getName();

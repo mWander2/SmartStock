@@ -1,8 +1,8 @@
 <template>
   <div class="game-card">
     <div class="game-info">
+      <p>Account Value: ${{(stockValue + portfolio.cashBalance)?.toFixed(2)}}</p>
       <h1>{{ game.gameName }}</h1>
-      <p>Account Value:</p>
       <h2>Organized By: <br />{{ game.organizerName }}</h2>
     </div>
     <div class="buy-info">
@@ -24,7 +24,7 @@
         <tr class="row" v-for="stockPortfolio in stockList" v-bind:key="stockPortfolio.id">
           <td>{{stockPortfolio.ticker}}</td>
           <td>{{stockPortfolio.quantity}}</td>
-          <td>${{stockPortfolio.value}}</td>
+          <td>${{stockPortfolio.value?.toFixed(2)}}</td>
           <td class="sell-row">
             <button class="sell" v-on:click="sell(stockPortfolio)">Sell</button>
           </td>
@@ -58,10 +58,16 @@ export default {
       newUser:{
         username: "",
       },
-    };
+    }
   },
   computed : {
-    
+    stockValue() {
+      let sum = 0;
+      this.stockList.forEach(s => {
+        sum += s.value;
+      })
+      return sum;
+    }
   },
   methods: {
     buy() { 
@@ -91,16 +97,15 @@ export default {
                 alert('Your sale was succesful!');
                 this.$router.go();
               }
-            }
-          )
-        }
-      )
+            });
+        });
     },
     addUser(){
     stockService.addUserToGame(this.gameId, this.newUser.username).then((response) => {
       if(response.status === 200){
         alert("User added to the game successfully.");
         this.newUser.username = "";
+        this.$router.go();
       }
     }).catch((error) => {
       console.error(error);
@@ -127,9 +132,8 @@ export default {
             response => {
               let price = response.data.close;
               s.value = price * s.quantity;
-            }
-          )
-        })
+            });
+        });
     });
   },
 };

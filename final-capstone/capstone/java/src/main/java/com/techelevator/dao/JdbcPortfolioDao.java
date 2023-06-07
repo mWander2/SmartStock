@@ -78,19 +78,19 @@ public class JdbcPortfolioDao implements PortfolioDao {
 //        return portfolio;
 //    }
 //
-//    @Override
-//    public List<Portfolio> getByGameId(int gameId) {
-//        List<Portfolio> portfolios = new ArrayList<>();
-//
-//        String sql = "SELECT * FROM portfolio WHERE game_id = ?";
-//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
-//
-//        if(results.next()){
-//            Portfolio portfolio = mapRowToPortfolio(results);
-//            portfolios.add(portfolio);
-//        }
-//        return portfolios;
-//    }
+    @Override
+    public List<Portfolio> getPortfoliosByGameId(int gameId) {
+        List<Portfolio> portfolios = new ArrayList<>();
+
+        String sql = "SELECT * FROM portfolio WHERE game_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
+
+        while(results.next()){
+            Portfolio portfolio = mapRowToPortfolio(results);
+            portfolios.add(portfolio);
+        }
+        return portfolios;
+    }
 //
 //    @Override
 //    public List<Portfolio> getByUserId(int userId) {

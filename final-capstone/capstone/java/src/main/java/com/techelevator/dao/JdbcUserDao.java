@@ -86,7 +86,8 @@ public class JdbcUserDao implements UserDao {
     public List<User> getUsersPerGame(int gameId) {
         List<User> userList = new ArrayList<>();
         String sql = "SELECT * FROM users AS u " +
-                "JOIN user_game AS ug ON u.user_id = ug.user_id WHERE game_id = ?";
+                "JOIN user_game AS ug ON u.user_id = ug.user_id WHERE game_id = ? " +
+                "ORDER BY u.user_id";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gameId);
         while(results.next()) {
             User user = mapRowToUser(results);

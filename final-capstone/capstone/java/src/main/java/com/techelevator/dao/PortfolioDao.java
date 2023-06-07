@@ -13,7 +13,7 @@ public interface PortfolioDao {
 //    List<Portfolio> getAllPortfolios();
 //    Portfolio getByPortfolioId(int portfolioId);
 //    Portfolio getPortfolio(int gameId, int userId);
-//    List<Portfolio> getByGameId(int gameId);
+    List<Portfolio> getPortfoliosByGameId(int gameId);
 //    List<Portfolio> getByUserId(int userId);
 //
 //    Portfolio create(int gameId, int userId, List<StockModel> stocks, BigDecimal cashBalance);

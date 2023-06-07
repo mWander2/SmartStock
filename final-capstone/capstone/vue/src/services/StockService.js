@@ -6,12 +6,20 @@ export default {
         return axios.get("/games")
     },
 
+    getGamesByUser() {
+        return axios.get("games/user")
+    },
+
     createGame(game) {
         return axios.post('/games/new', game)
     },
 
     getGame(id) {
         return axios.get(`/games/${id}`)
+    },
+
+    getAllPortfolios(gameId) {
+        return axios.get(`/portfolios/all/${gameId}`)
     },
 
     getPortfolio(gameId) {
@@ -29,6 +37,7 @@ export default {
     sell(cost, gameId, stockId) {
         return axios.delete(`portfolios/stocks/sell/${cost}/${gameId}/${stockId}`)
     },
+    
     addUserToGame(gameId, username){
         const data = { username:username };
         return axios.post(`/games/${gameId}/users`, data);
