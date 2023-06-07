@@ -1,16 +1,16 @@
 package com.techelevator.api.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ResultsModel {
-
     private BigDecimal close;
     private long volume;
     private String status;
     private String symbol;
+    private BigDecimal value;
 
     public ResultsModel() {
-
     }
 
     public ResultsModel(BigDecimal close, long volume, String status, String symbol) {
@@ -18,6 +18,7 @@ public class ResultsModel {
         this.volume = volume;
         this.status = status;
         this.symbol = symbol;
+        this.value = calculateValue();
     }
 
     public BigDecimal getClose() {
@@ -52,12 +53,16 @@ public class ResultsModel {
         this.symbol = symbol;
     }
 
-    public void setTicker(String asText) {
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setClosePrice(double c) {
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
-    public void setTransactions(int n) {
+    public BigDecimal calculateValue() {
+        BigDecimal value = close.multiply(BigDecimal.valueOf(volume));
+        return value.setScale(2, RoundingMode.HALF_UP);
     }
 }
