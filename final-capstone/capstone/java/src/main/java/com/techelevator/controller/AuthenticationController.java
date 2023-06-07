@@ -18,6 +18,8 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 public class AuthenticationController {
@@ -59,6 +61,12 @@ public class AuthenticationController {
             userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
         }
     }
+
+    @GetMapping("/users/{gameId}")
+    public List<User> getUsersPerGame(@PathVariable int gameId) {
+        return userDao.getUsersPerGame(gameId);
+    }
+
 
 }
 

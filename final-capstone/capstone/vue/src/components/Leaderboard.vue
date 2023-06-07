@@ -6,8 +6,8 @@
               <th>Player</th>
               <th>Account Value</th>
           </tr>
-          <tr class="row" v-for="i in 10" v-bind:key="i">
-              <td>Player {{i}}</td>
+          <tr class="row" v-for="user in userList" v-bind:key="user.id">
+              <td>{{user.username}}</td>
               <td>$$$$$$</td>
           </tr>
       </table>
@@ -15,8 +15,21 @@
 </template>
 
 <script>
+import userService from '../services/AuthService.js'
 export default {
-
+    data() {
+        return {
+            gameId : this.$route.params.id,
+            userList : []
+        }
+    },
+    created() {
+        userService.getUsers(this.gameId).then(
+            response => {
+                this.userList = response.data;
+            }
+        )
+    }
 }
 </script>
 
